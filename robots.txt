@@ -1,0 +1,9 @@
+User-agent: *
+Crawl-delay: 5
+
+Disallow: /cgi-bin/
+Disallow: /.well-known/
+Disallow: /api/
+Disallow: /.github/
+
+Sitemap: https://theclashfruit.me/sitemap.xml

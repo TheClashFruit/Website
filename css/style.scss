@@ -1,0 +1,304 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded&family=Noto+Sans&family=Noto+Sans+Mono&family=Noto+Color+Emoji&family=Nunito");
+
+.material-symbols-rounded {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 500,
+    'GRAD' 200,
+    'opsz' 48
+}
+
+//////////////////////////////////////
+
+$colorPrimary: #00796b;
+
+$colorBackground1: #232323;
+$colorBackground2: #1e1e1e;
+
+$headerTags: ('h1': 1.5rem, 'h2': 1.4rem, 'h3': 1.3rem, 'h4': 1.2rem, 'h5': 1.1rem, 'h6': 1rem);
+
+//////////////////////////////////////
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+//////////////////////////////////////
+
+body {
+  height: 100%;
+  width: 100vw;
+
+  background: $colorBackground1;
+  color: #FFFFFF;
+
+  overflow-x: hidden;
+}
+
+//////////////////////////////////////
+
+a {
+  font-family: 'Noto Sans', 'Noto Color Emoji';
+  font-weight: 500;
+
+  text-decoration: none;
+
+  color: #FFFFFF;
+  
+  &:hover {
+    color: $colorPrimary;
+
+    text-decoration: underline;
+  }
+}
+
+//////////////////////////////////////
+
+@each $headerTag, $headerSize in $headerTags {
+  #{$headerTag} {
+    font-family: 'Noto Sans', 'Noto Color Emoji', sans-serif;
+    // font-size: #{$headerSize};
+
+    font-weight: 500;
+    line-height: 1.2;
+
+    margin-bottom: 6px;
+    color: #FFFFFF;
+  }
+}
+
+p {
+  font-family: 'Noto Sans', 'Noto Color Emoji', sans-serif;
+  // font-size: 16px;
+
+  font-weight: 400;
+  line-height: 1.5;
+
+  margin-bottom: 6px;
+  color: #FFFFFF;
+}
+
+pre, code, .pre, .code {
+  font-family: 'Noto Sans Mono' , 'Noto Color Emoji', monospace;
+  // font-size: 16px;
+
+  font-weight: 400;
+  line-height: 1.5;
+
+  margin-bottom: 6px;
+  color: #FFFFFF;
+}
+
+//////////////////////////////////////
+
+.container {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+//////////////////////////////////////
+
+.navBar {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  width: 100vw;
+
+  transition: 0.2s;
+
+  &.navBarScrolled {
+    background: $colorBackground2;
+  }
+
+  > .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+
+    > .navBarBase {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      > .navBarBrand {
+        height: 30px;
+        width: 30px;
+      }
+
+      > .navBarToggle {
+        position: relative;
+
+        display: none;
+
+        color: #fff;
+
+        transition: 0.2s;
+
+        &:hover {
+          text-decoration: none;
+          color: #fff;
+        }
+      }
+    }
+
+    > .navCollapse {
+      &.open {
+        display: block;
+      }
+
+      > ul {
+        display: flex;
+
+        > li {
+          list-style: none;
+
+          padding: 8px;
+
+          > a {
+            color: rgba(255, 255, 255, 0.6);
+
+            &:hover, &.active {
+              color: #FFFFFF;
+
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    > .container {
+      flex-direction: column;
+      align-items: center;
+
+      padding: 8px 16px;
+
+      > .navBarBase {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100%;
+
+        > .navBarToggle {
+          display: block;
+        }
+      }
+
+      > .navCollapse {
+        display: none;
+
+        transition: 0.2s;
+        opacity: 0;
+
+        > ul {
+          display: block;
+          width: 100vw;
+
+          > li {
+            padding: 8px 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+//////////////////////////////////////
+
+.pageHero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 33vh;
+
+  background: $colorPrimary;
+  color: #fff;
+}
+
+main {
+  margin-top: 8px;
+
+  @media (max-width: 768px) {
+    padding: 0 8px;
+  }
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 8px;
+
+  > .projectItem {
+    background: $colorBackground2;
+
+    border-radius: 6px;
+
+    padding: 8px;
+
+    > .titleRow {
+      display: flex;
+      justify-content: space-between;
+
+      > .actionIcons > a:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+form {
+  > input, textarea {
+    background: $colorBackground2;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+
+    padding: 0.5rem 1rem;
+    margin-bottom: 8px;
+
+    color: #FFFFFF;
+
+    font-size: 0.9rem;
+    font-family: 'Noto Sans', 'Noto Color Emoji', sans-serif;
+
+    width: calc(100% - (2rem + 2px));
+
+    &:focus {
+      outline: none;
+      border: 1px solid rgba($colorPrimary, 0.8);
+    }
+  }
+
+  > textarea {
+    resize: vertical;
+
+    min-height: 250px;
+  }
+
+  > button {
+    background-color: $colorPrimary;
+    color: #fff;
+
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    font-size: 0.9rem;
+    font-family: 'Noto Sans', 'Noto Color Emoji', sans-serif;
+
+    padding: 0.5rem 1rem;
+
+    transition: 100ms;
+  }
+}

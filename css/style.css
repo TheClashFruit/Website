@@ -1,0 +1,249 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded&family=Noto+Sans&family=Noto+Sans+Mono&family=Noto+Color+Emoji&family=Nunito");
+.material-symbols-rounded {
+  font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 200, "opsz" 48;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  height: 100%;
+  width: 100vw;
+  background: #232323;
+  color: #FFFFFF;
+  overflow-x: hidden;
+}
+
+a {
+  font-family: "Noto Sans", "Noto Color Emoji";
+  font-weight: 500;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+a:hover {
+  color: #00796b;
+  text-decoration: underline;
+}
+
+h1 {
+  font-family: "Noto Sans", "Noto Color Emoji", sans-serif;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 6px;
+  color: #FFFFFF;
+}
+
+h2 {
+  font-family: "Noto Sans", "Noto Color Emoji", sans-serif;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 6px;
+  color: #FFFFFF;
+}
+
+h3 {
+  font-family: "Noto Sans", "Noto Color Emoji", sans-serif;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 6px;
+  color: #FFFFFF;
+}
+
+h4 {
+  font-family: "Noto Sans", "Noto Color Emoji", sans-serif;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 6px;
+  color: #FFFFFF;
+}
+
+h5 {
+  font-family: "Noto Sans", "Noto Color Emoji", sans-serif;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 6px;
+  color: #FFFFFF;
+}
+
+h6 {
+  font-family: "Noto Sans", "Noto Color Emoji", sans-serif;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 6px;
+  color: #FFFFFF;
+}
+
+p {
+  font-family: "Noto Sans", "Noto Color Emoji", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 6px;
+  color: #FFFFFF;
+}
+
+pre, code, .pre, .code {
+  font-family: "Noto Sans Mono", "Noto Color Emoji", monospace;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 6px;
+  color: #FFFFFF;
+}
+
+.container {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  transition: 0.2s;
+}
+.navBar.navBarScrolled {
+  background: #1e1e1e;
+}
+.navBar > .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+}
+.navBar > .container > .navBarBase {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navBar > .container > .navBarBase > .navBarBrand {
+  height: 30px;
+  width: 30px;
+}
+.navBar > .container > .navBarBase > .navBarToggle {
+  position: relative;
+  display: none;
+  color: #fff;
+  transition: 0.2s;
+}
+.navBar > .container > .navBarBase > .navBarToggle:hover {
+  text-decoration: none;
+  color: #fff;
+}
+.navBar > .container > .navCollapse.open {
+  display: block;
+}
+.navBar > .container > .navCollapse > ul {
+  display: flex;
+}
+.navBar > .container > .navCollapse > ul > li {
+  list-style: none;
+  padding: 8px;
+}
+.navBar > .container > .navCollapse > ul > li > a {
+  color: rgba(255, 255, 255, 0.6);
+}
+.navBar > .container > .navCollapse > ul > li > a:hover, .navBar > .container > .navCollapse > ul > li > a.active {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+@media (max-width: 768px) {
+  .navBar > .container {
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 16px;
+  }
+  .navBar > .container > .navBarBase {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .navBar > .container > .navBarBase > .navBarToggle {
+    display: block;
+  }
+  .navBar > .container > .navCollapse {
+    display: none;
+    transition: 0.2s;
+    opacity: 0;
+  }
+  .navBar > .container > .navCollapse > ul {
+    display: block;
+    width: 100vw;
+  }
+  .navBar > .container > .navCollapse > ul > li {
+    padding: 8px 16px;
+  }
+}
+
+.pageHero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 33vh;
+  background: #00796b;
+  color: #fff;
+}
+
+main {
+  margin-top: 8px;
+}
+@media (max-width: 768px) {
+  main {
+    padding: 0 8px;
+  }
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 8px;
+}
+.projectsGrid > .projectItem {
+  background: #1e1e1e;
+  border-radius: 6px;
+  padding: 8px;
+}
+.projectsGrid > .projectItem > .titleRow {
+  display: flex;
+  justify-content: space-between;
+}
+.projectsGrid > .projectItem > .titleRow > .actionIcons > a:hover {
+  text-decoration: none;
+}
+
+form > input, form textarea {
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 8px;
+  color: #FFFFFF;
+  font-size: 0.9rem;
+  font-family: "Noto Sans", "Noto Color Emoji", sans-serif;
+  width: calc(100% - (2rem + 2px));
+}
+form > input:focus, form textarea:focus {
+  outline: none;
+  border: 1px solid rgba(0, 121, 107, 0.8);
+}
+form > textarea {
+  resize: vertical;
+  min-height: 250px;
+}
+form > button {
+  background-color: #00796b;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: "Noto Sans", "Noto Color Emoji", sans-serif;
+  padding: 0.5rem 1rem;
+  transition: 100ms;
+}
+
+/*# sourceMappingURL=style.css.map */
