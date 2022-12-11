@@ -15,6 +15,14 @@ const toggleNavBar = () => {
   }
 }
 
+const sharePost = (link, title, content) => {
+  navigator.share({
+    title: title,
+    text: content,
+    url: link
+  });
+}
+
 document.addEventListener('scroll', function(e) {
   console.log(window.scrollY);
 

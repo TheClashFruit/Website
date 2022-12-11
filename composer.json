@@ -1,0 +1,6 @@
+{
+    "require": {
+        "vlucas/phpdotenv": "^5.5",
+        "erusev/parsedown": "^1.7"
+    }
+}

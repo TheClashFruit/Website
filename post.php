@@ -1,3 +1,29 @@
+<?php
+  require __DIR__ . '/vendor/autoload.php';
+  require __DIR__ . '/config/website.conf.php';
+
+  require __DIR__ . '/vendor/erusev/parsedown/Parsedown.php';
+
+  $md = new Parsedown();
+
+  if(isset($_GET['id'])) {
+    $id   = $_GET['id'];
+    $post = $MySQL->prepare("SELECT * FROM posts WHERE permalink = ?");
+
+    $post->bind_param('s', $id);
+    $post->execute();
+
+    $post = $post->get_result();
+    $post = $post->fetch_row();
+
+    if($post == null) {
+      header('Location: /blog');
+    }
+  } else {
+    header('Location: /blog');
+  }
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,20 +31,20 @@
 
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
-    <title>TheClashFruit &bull; Home</title>
+    <title>TheClashFruit &bull; <?php echo $post[2]; ?></title>
 
     <link rel="icon" href="/favicon.ico">
 
     <!-- SEO -->
-    <meta name="name" content="TheClashFruit &bull; Home">
+    <meta name="name" content="TheClashFruit &bull; <?php echo $post[2]; ?>">
     <meta name="description" content="I'm a software developer in my free time and student living in Hungary, I like to make android apps, websites, discord bots. I'm good in Kotlin, Java, JavaScript, HTML and CSS but I know some Rust, Python and I can write hello world in C++;">
     <meta name="keywords" content="TheClashFruit, tcf, blokkok, susman, the, clash, fruit, Home">
     <meta name="theme-color" content="#00796B">
 
     <!-- Open Graph -->
     <meta property="og:site_name" content="TheClashFruit">
-    <meta property="og:title" content="Home">
-    <meta property="og:type" content="website">
+    <meta property="og:title" content="<?php echo $post[2]; ?>">
+    <meta property="og:type" content="article">
     <meta property="og:locale" content="en_GB">
     <meta property="og:url" content="https://theclashfruit.me">
     <meta property="og:image" content="https://www.theclashfruit.me/img/logo.png">
@@ -60,7 +86,7 @@
         <div class="navCollapse">
           <ul>
             <li>
-              <a href="#" class="active">Home</a>
+              <a href="/">Home</a>
             </li>
             <li>
               <a href="/blog">Blog</a>
@@ -78,18 +104,20 @@
 
     <div class="pageHero">
       <div class="container">
-        <h1>Home</h1>
+        <h1><?php echo $post[2]; ?></h1>
       </div>
     </div>
 
     <main>
       <div class="container">
         <p>
-          Hello there 👋! I'm TheClashFruit, a young software developer living in Hungary.
+          <?php echo $md->text($post[3]); ?>
         </p>
       </div>
     </main>
 
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
     <script src="/js/main.js"></script>
   </body>
 </html>

@@ -1,3 +1,14 @@
+<?php
+  require __DIR__ . '/vendor/autoload.php';
+  require __DIR__ . '/config/website.conf.php';
+
+  require __DIR__ . '/vendor/erusev/parsedown/Parsedown.php';
+
+  $md = new Parsedown();
+
+  $allPosts = $MySQL->query('SELECT * FROM posts ORDER BY id DESC');
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -81,6 +92,36 @@
         <h1>Blog</h1>
       </div>
     </div>
+
+    <main>
+      <div class="container">
+        <div class="listGrid">
+          <?php
+            while ($post = $allPosts->fetch_assoc()) {
+              $contentShort = strip_tags($md->text($post['content']));
+              $contentShort = substr($contentShort, 0, 150) . '...';
+
+              echo "
+                <div class='listItem'>
+                  <div class='titleRow'>
+                    <h2><a href='/post/{$post['permalink']}'>{$post['title']}</a></h2>
+                    
+                    <div class='actionIcons'>
+                      <a href='javascript:void(0);' onclick='sharePost(\"https://theclashfruit.me/post/{$post['permalink']}\", \"{$post['title']}\", \"{$contentShort}\")'>
+                        <span class='material-symbols-rounded'>
+                        share
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                  <p class='blogPostDate'>{$post['created']}</p>
+                  <p class='blogPostDescription'>{$contentShort}</p>
+                </div>
+              ";
+            }
+          ?>
+      </div>
+    </main>
 
     <script src="/js/main.js"></script>
   </body>
