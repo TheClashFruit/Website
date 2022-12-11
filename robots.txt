@@ -5,5 +5,7 @@ Disallow: /cgi-bin/
 Disallow: /.well-known/
 Disallow: /api/
 Disallow: /.github/
+Disallow: /config/
+Disallow: /phpmyadmin/
 
 Sitemap: https://theclashfruit.me/sitemap.xml
