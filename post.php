@@ -37,7 +37,7 @@
 
     <!-- SEO -->
     <meta name="name" content="TheClashFruit &bull; <?php echo $post[2]; ?>">
-    <meta name="description" content="I'm a software developer in my free time and student living in Hungary, I like to make android apps, websites, discord bots. I'm good in Kotlin, Java, JavaScript, HTML and CSS but I know some Rust, Python and I can write hello world in C++;">
+    <meta name="description" content="<?php echo strip_tags($md->text($post[3])); ?>">
     <meta name="keywords" content="TheClashFruit, tcf, blokkok, susman, the, clash, fruit, Home">
     <meta name="theme-color" content="#00796B">
 
@@ -48,7 +48,12 @@
     <meta property="og:locale" content="en_GB">
     <meta property="og:url" content="https://theclashfruit.me">
     <meta property="og:image" content="https://www.theclashfruit.me/img/logo.png">
-    <meta property="og:description" content="I'm a software developer in my free time and student living in Hungary, I like to make android apps, websites, discord bots. I'm good in Kotlin, Java, JavaScript, HTML and CSS but I know some Rust, Python and I can write hello world in C++;">
+    <meta property="og:description" content="<?php echo strip_tags($md->text($post[3])); ?>">
+
+    <meta property="article:section" content="Technology">
+    <meta property="article:author" content="TheClashFruit">
+    <meta property="article:published_time" content="<?php echo Date('c', strtotime($post[4])); ?>">
+    <meta property="article:modified_time" content="<?php echo Date('c', strtotime($post[5])); ?>">
 
     <!-- <link type="application/json+oembed" href="https://theclashfruit.me/api/v1/oembed?url=${url}" /> -->
 

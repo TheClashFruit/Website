@@ -14,6 +14,7 @@
       'author' => 'TheClashFruit',
       'permalink' => $post['permalink'],
       'created' => strtotime($post['created']),
+      'updated' => strtotime($post['updated']),
       'content' => $post['content']
     );
   }
