@@ -103,6 +103,7 @@
 
               echo "
                 <div class='listItem'>
+                  <img src='{$post['picture']}' class='listItemImg'>
                   <div class='titleRow'>
                     <h2><a href='/post/{$post['permalink']}'>{$post['title']}</a></h2>
                     

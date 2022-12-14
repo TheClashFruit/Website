@@ -17,10 +17,14 @@
     $post = $post->fetch_row();
 
     if($post == null) {
-      header('Location: /blog');
+      http_response_code(404);
+      include('404.html');
+      die();
     }
   } else {
-    header('Location: /blog');
+    http_response_code(404);
+    include('404.html');
+    die();
   }
 ?>
 
@@ -31,29 +35,36 @@
 
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
-    <title>TheClashFruit &bull; <?php echo $post[2]; ?></title>
+    <title>TheClashFruit &bull; <?php echo $post[4]; ?></title>
 
     <link rel="icon" href="/favicon.ico">
 
     <!-- SEO -->
-    <meta name="name" content="TheClashFruit &bull; <?php echo $post[2]; ?>">
-    <meta name="description" content="<?php echo strip_tags($md->text($post[3])); ?>">
-    <meta name="keywords" content="TheClashFruit, tcf, blokkok, susman, the, clash, fruit, Home">
+    <meta name="name" content="TheClashFruit &bull; <?php echo $post[4]; ?>">
+    <meta name="description" content="<?php echo str_replace("\n", " ", strip_tags($md->text($post[5]))); ?>">
+    <meta name="keywords" content="TheClashFruit, tcf, blokkok, susman, the, clash, fruit, <?php echo $post[2]; ?>">
     <meta name="theme-color" content="#00796B">
 
     <!-- Open Graph -->
     <meta property="og:site_name" content="TheClashFruit">
-    <meta property="og:title" content="<?php echo $post[2]; ?>">
+    <meta property="og:title" content="<?php echo $post[4]; ?>">
     <meta property="og:type" content="article">
     <meta property="og:locale" content="en_GB">
-    <meta property="og:url" content="https://theclashfruit.me">
-    <meta property="og:image" content="https://www.theclashfruit.me/img/logo.png">
-    <meta property="og:description" content="<?php echo strip_tags($md->text($post[3])); ?>">
+    <meta property="og:url" content="https://theclashfruit.me/post/<?php echo $post[1]; ?>">
+    <meta property="og:image" content="<?php echo $post[3]; ?>">
+    <meta property="og:description" content="<?php echo str_replace("\n", " ", strip_tags($md->text($post[5]))); ?>">
 
     <meta property="article:section" content="Technology">
     <meta property="article:author" content="TheClashFruit">
-    <meta property="article:published_time" content="<?php echo Date('c', strtotime($post[4])); ?>">
-    <meta property="article:modified_time" content="<?php echo Date('c', strtotime($post[5])); ?>">
+    <meta property="article:published_time" content="<?php echo Date('c', strtotime($post[6])); ?>">
+    <meta property="article:modified_time" content="<?php echo Date('c', strtotime($post[7])); ?>">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="theclashfruit.me">
+    <meta property="twitter:url" content="https://theclashfruit.me/post/<?php echo $post[1]; ?>">
+    <meta name="twitter:title" content="<?php echo $post[4]; ?>">
+    <meta name="twitter:description" content="<?php echo str_replace("\n", " ", strip_tags($md->text($post[5]))); ?>">
+    <meta name="twitter:image" content="<?php echo $post[3]; ?>">
 
     <!-- <link type="application/json+oembed" href="https://theclashfruit.me/api/v1/oembed?url=${url}" /> -->
 
@@ -109,14 +120,14 @@
 
     <div class="pageHero">
       <div class="container">
-        <h1><?php echo $post[2]; ?></h1>
+        <h1><?php echo $post[4]; ?></h1>
       </div>
     </div>
 
     <main>
       <div class="container">
         <p>
-          <?php echo $md->text($post[3]); ?>
+          <?php echo $md->text($post[5]); ?>
         </p>
       </div>
     </main>

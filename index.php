@@ -111,6 +111,7 @@
 
               echo "
                 <div class='listItem'>
+                  <img src='{$post['picture']}' class='listItemImg'>
                   <div class='titleRow'>
                     <h2><a href='/post/{$post['permalink']}'>{$post['title']}</a></h2>
                     
@@ -132,6 +133,8 @@
       </div>
     </main>
 
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
     <script src="/js/main.js"></script>
   </body>
 </html>
