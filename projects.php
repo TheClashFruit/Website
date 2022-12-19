@@ -107,7 +107,7 @@
           </p>
         </div>
         <div class="listItem">
-          <img src='' class='listItemImg'>
+          <img src='https://api.mcbanners.com/banner/saved/FqrWTNFGAKcUUD.png' class='listItemImg'>
           <div class="titleRow">
             <h2>Stuff+</h2>
 
@@ -152,6 +152,12 @@
         </div>
       </div>
     </main>
+
+    <footer>
+      <p>
+        Copyright &copy; <?php echo date("Y"); ?> TheClashFruit
+      </p>
+    </footer>
 
     <script src="/js/main.js"></script>
   </body>

@@ -322,6 +322,13 @@ form > button {
     filter: invert(1);
   }
 }
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
 pre code.hljs {
   display: block;
   overflow-x: auto;

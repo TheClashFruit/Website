@@ -132,6 +132,12 @@
       </div>
     </main>
 
+    <footer>
+      <p>
+        Copyright &copy; <?php echo date("Y"); ?> TheClashFruit
+      </p>
+    </footer>
+
     <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
     <script src="/js/main.js"></script>

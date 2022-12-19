@@ -109,6 +109,12 @@
       </div>
     </main>
 
+    <footer>
+      <p>
+        Copyright &copy; <?php echo date("Y"); ?> TheClashFruit
+      </p>
+    </footer>
+
     <script src="/js/main.js"></script>
   </body>
 </html>

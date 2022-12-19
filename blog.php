@@ -6,7 +6,7 @@
 
   $md = new Parsedown();
 
-  $allPosts = $MySQL->query('SELECT * FROM posts ORDER BY id DESC');
+  $allPosts = $MySQL->query("SELECT * FROM posts ORDER BY id DESC");
 ?>
 
 <!doctype html>
@@ -44,7 +44,7 @@
       _paq.push(['trackPageView']);
       _paq.push(['enableLinkTracking']);
       (function() {
-        var u="//matomo.theclashfruit.me/";
+        var u='//matomo.theclashfruit.me/';
         _paq.push(['setTrackerUrl', u+'matomo.php']);
         _paq.push(['setSiteId', '1']);
         var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
@@ -99,30 +99,38 @@
           <?php
             while ($post = $allPosts->fetch_assoc()) {
               $contentShort = strip_tags($md->text($post['content']));
-              $contentShort = substr($contentShort, 0, 150) . '...';
+              $contentShort = substr($contentShort, 0, 150) . "...";
+              $contentShare = str_replace("'", "\'", $contentShort);
+              $contentShare = str_replace("\n", " ", $contentShare);
 
               echo "
-                <div class='listItem'>
-                  <img src='{$post['picture']}' class='listItemImg'>
-                  <div class='titleRow'>
-                    <h2><a href='/post/{$post['permalink']}'>{$post['title']}</a></h2>
+                <div class=\"listItem\">
+                  <img src=\"{$post['picture']}\" class=\"listItemImg\">
+                  <div class=\"titleRow\">
+                    <h2><a href=\"/post/{$post['permalink']}\">{$post['title']}</a></h2>
                     
-                    <div class='actionIcons'>
-                      <a href='javascript:void(0);' onclick='sharePost(\"https://theclashfruit.me/post/{$post['permalink']}\", \"{$post['title']}\", \"{$contentShort}\")'>
-                        <span class='material-symbols-rounded'>
+                    <div class=\"actionIcons\">
+                      <a href=\"javascript:void(0);\" onclick=\"sharePost('https://theclashfruit.me/post/{$post['permalink']}', '{$post['title']}', '{$contentShare}')\">
+                        <span class=\"material-symbols-rounded\">
                         share
                         </span>
                       </a>
                     </div>
                   </div>
-                  <p class='blogPostDate'>{$post['created']}</p>
-                  <p class='blogPostDescription'>{$contentShort}</p>
+                  <p class=\"blogPostDate\">{$post['created']}</p>
+                  <p class=\"blogPostDescription\">{$contentShort}</p>
                 </div>
               ";
             }
           ?>
       </div>
     </main>
+
+    <footer>
+      <p>
+        Copyright &copy; <?php echo date("Y"); ?> TheClashFruit
+      </p>
+    </footer>
 
     <script src="/js/main.js"></script>
   </body>
