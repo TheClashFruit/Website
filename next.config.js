@@ -24,7 +24,39 @@ const nextConfig = {
         permanent: true,
       },
     ]
+  },
+  headers: async () => {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=5184000; includeSubDomains'
+          }
+        ]
+      },
+      {
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=5184000; includeSubDomains'
+          },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*'
+          }
+        ]
+      }
+    ]
   }
 }
 
 module.exports = nextConfig
+
+
+/*
+ add_header Access-Control-Allow-Origin  "*";
+ add_header Strict-Transport-Security    "max-age=5184000; includeSubDomains";
+ */
