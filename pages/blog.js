@@ -14,7 +14,7 @@ export default function Blog({ blogData }) {
 
       <Hero pageType="page" pageData={{ title: 'Blog' }} />
 
-      <main className={`grid grid-cols-3 my-4 max-md:grid-cols-1 max-lg:grid-cols-2 auto-rows-max grid-flow-row gap-4 max-w-5xl lg:mx-auto max-lg:px-4 lg:px-0`}>
+      <main className={`grid grid-cols-3 my-4 max-md:grid-cols-1 max-lg:grid-cols-2 auto-rows-max grid-flow-row gap-4 max-w-5xl lg:mx-auto max-lg:mx-4 lg:px-0`}>
         {blogData.map((blog) => (
           <BlogItem
             blogAuthor={blog.author}

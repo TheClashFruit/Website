@@ -31,7 +31,7 @@ export default function SettingsOverlay() {
           </select>
         </div>
 
-        <div className={`flex justify-between items-center mb-2`}>
+        <div className={`hidden justify-between items-center mb-2`}>
           <div className={`flex flex-col mr-4`}>
             <label className={`font-bold`}>Language</label>
             <label>Choose your preferred language.</label>

@@ -3,10 +3,6 @@ const path = require('path');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  i18n: {
-    locales: ['en', 'hu', 'fr', 'de'],
-    defaultLocale: 'en'
-  },
   sassOptions: {
     includePaths: [ path.join(__dirname, 'styles') ],
   },
@@ -57,6 +53,8 @@ module.exports = nextConfig
 
 
 /*
- add_header Access-Control-Allow-Origin  "*";
- add_header Strict-Transport-Security    "max-age=5184000; includeSubDomains";
- */
+ i18n: {
+   locales: ['en', 'hu', 'fr', 'de'],
+   defaultLocale: 'en'
+ },
+*/
