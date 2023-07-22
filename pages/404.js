@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Hero from '@/components/Hero';
 import Main from '@/components/Main';
 
-export default function Error() {
+export default function NotFound() {
   const textPool = [
     "My bad you should have not ended up here.",
     "What are you looking for mate?",

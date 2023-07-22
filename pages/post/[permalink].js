@@ -3,9 +3,12 @@ import showdown from 'showdown';
 import showdownHighlight from 'showdown-highlight'
 import Hero from '@/components/Hero';
 import SettingsOverlay from '@/components/SettingsOverlay';
+import { notFound } from 'next/navigation';
+
+import 'showdown-youtube';
+import footnotes from 'showdown-footnotes';
 
 export default function Post({ postData }) {
-
   return (
     <>
       <Navbar pageData={{ title: postData.title, active: 'post', type: 'post', postData }} />
@@ -20,6 +23,13 @@ export default function Post({ postData }) {
 export async function getServerSideProps(context) {
 
   const postFetch = await fetch(`https://theclashfruit.me/api/v1/post/${context.params.permalink}`)
+
+  if(postFetch.status !== 200) {
+    return {
+      notFound: true
+    }
+  }
+
   const postData = await postFetch.json()
 
   const converter = new showdown.Converter({
@@ -27,15 +37,17 @@ export async function getServerSideProps(context) {
       showdownHighlight({
         pre: true,
         auto_detection: true
-      })
+      }),
+      'youtube',
+      footnotes
     ]
   });
 
   converter.setFlavor('github');
 
-  postData.content = converter.makeHtml(postData.content);
+  console.log(converter.getOptions().extensions)
 
-  console.log(postData)
+  postData.content = converter.makeHtml(postData.content);
 
   return {
     props: {

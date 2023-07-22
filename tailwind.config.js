@@ -7,9 +7,9 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: ['Noto Sans', 'Noto Color Emoji', 'system-ui'],
-      serif: ['Outfit', 'Noto Color Emoji', 'system-ui'],
-      mono: ['Noto Mono', 'monospace'],
+      sans: ['"Noto Sans"', '"Noto Color Emoji"', 'system-ui'],
+      serif: ['Outfit', '"Noto Color Emoji"', 'system-ui'],
+      mono: ['"Noto Sans Mono"', 'monospace'],
     },
   },
   plugins: [

@@ -16,9 +16,15 @@ const nextConfig = {
 
     return commitData[0].sha
   },
-  experimental: {
-    serverActions: true,
-  },
+  redirects: async () => {
+    return [
+      {
+        source: '/post/:year/:permalink',
+        destination: '/post/:permalink',
+        permanent: true,
+      },
+    ]
+  }
 }
 
 module.exports = nextConfig
