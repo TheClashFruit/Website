@@ -16,6 +16,9 @@ const nextConfig = {
 
     return commitData[0].sha
   },
+  experimental: {
+    serverActions: true,
+  },
 }
 
 module.exports = nextConfig

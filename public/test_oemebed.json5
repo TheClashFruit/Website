@@ -1,0 +1,8 @@
+{
+  type: 'link',
+  version: '1.0',
+  title: blogTitle,
+  author_name: blogAuthor,
+  author_url: 'https://theclashfruit.me',
+  thumbnail_url: blogThumbnail,
+}

@@ -9,8 +9,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar pageTitle="Home" activePage="home" />
-      <SettingsOverlay />
+      <Navbar pageData={{ title: 'Home', active: 'home', type: 'page' }} />
 
       <Hero pageType="page" pageData={{ title: 'Home' }} />
 

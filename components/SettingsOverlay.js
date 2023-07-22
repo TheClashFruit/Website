@@ -4,6 +4,8 @@ export default function SettingsOverlay() {
   const settingsPanelRef  = useRef();
   const settingsButtonRef = useRef();
 
+  // { v: 1, theme: 'dark', language: 'en', blur: true, tracking: true, ads: true }
+
   const onSettingsButtonClick = () => {
     settingsPanelRef.current.classList.toggle('hidden');
     settingsPanelRef.current.classList.toggle('flex');
@@ -48,8 +50,8 @@ export default function SettingsOverlay() {
 
         <div className={`flex justify-between items-center mb-2`}>
           <div className={`flex flex-col mr-4`}>
-            <label className={`font-bold`}>Matomo Tracking</label>
-            <label>Disable if you want to opt out from tracking.</label>
+            <label className={`font-bold`}>Analytics</label>
+            <label>Disable it if you want to opt out from analytics.</label>
           </div>
           <input type="checkbox" className={`rounded-md border-gray-950/50 bg-gray-950/40 accent-teal-700 cursor-pointer`} />
         </div>

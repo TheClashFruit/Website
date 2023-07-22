@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
-export default function Navbar({ pageTitle, activePage }) {
+export default function Navbar({ pageData }) {
   const router = useRouter()
 
   const navRef = useRef();
@@ -44,23 +44,51 @@ export default function Navbar({ pageTitle, activePage }) {
   return (
     <>
       <Head>
-        <title>TheClashFruit &bull; {pageTitle}</title>
+        <title>TheClashFruit &bull; {pageData.title}</title>
 
         <link href="/favicon_black.ico" rel="icon" media="(prefers-color-scheme: light)" />
         <link href="/favicon_white.ico" rel="icon" media="(prefers-color-scheme: dark)" />
 
-        <meta name="name" content={`TheClashFruit &bull; ${pageTitle}`} />
-        <meta name="description" content="I'm TheClashFruit and I like to program, explore and craft stuff. I also like to play games. I have 3 Linux servers.. So, as you can see, I like to play around with Linux too. I'm currently learning how to write proper blog posts on my blog." />
-        <meta name="keywords" content={`TheClashFruit, tcf, blokkok, the, clash, fruit, ${pageTitle.trim().split(' ').join(', ')}`} />
-        <meta name="theme-color" content="#00796B" />
+        {pageData.type === 'page' && (
+          <>
+            <meta name="name" content={`TheClashFruit &bull; ${pageData.title}`} />
+            <meta name="description" content="I'm TheClashFruit and I like to program, explore and craft stuff. I also like to play games. I have 3 Linux servers.. So, as you can see, I like to play around with Linux too. I'm currently learning how to write proper blog posts on my blog." />
+            <meta name="keywords" content={`TheClashFruit, tcf, blokkok, the, clash, fruit, ${pageData.title.trim().split(' ').join(', ')}`} />
+            <meta name="theme-color" content="#00796B" />
 
-        <meta property="og:site_name" content="TheClashFruit" />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content={router.locale} />
-        <meta property="og:url" content="https://theclashfruit.me" />
-        <meta property="og:image" content="https://www.theclashfruit.me/img/logo.png" />
-        <meta property="og:description" content="I'm TheClashFruit and I like to program, explore and craft stuff. I also like to play games. I have 3 Linux servers.. So, as you can see, I like to play around with Linux too. I'm currently learning how to write proper blog posts on my blog." />
+            <meta property="og:site_name" content="TheClashFruit" />
+            <meta property="og:title" content={pageData.title} />
+            <meta property="og:type" content="website" />
+            <meta property="og:locale" content={router.locale} />
+            <meta property="og:url" content="https://theclashfruit.me" />
+            <meta property="og:image" content="https://www.theclashfruit.me/img/logo.png" />
+            <meta property="og:description" content="I'm TheClashFruit and I like to program, explore and craft stuff. I also like to play games. I have 3 Linux servers.. So, as you can see, I like to play around with Linux too. I'm currently learning how to write proper blog posts on my blog." />
+          </>
+        )}
+
+        {pageData.type === 'post' && (
+          <>
+            <meta name="name" content={`TheClashFruit &bull; ${pageData.title}`} />
+            <meta name="description" content={pageData.postData.content.replace(/(<([^>]+)>)/gi, "").substring(0, 200).trim()} />
+            <meta name="keywords" content={`TheClashFruit, tcf, blokkok, the, clash, fruit, ${pageData.postData.title}`} />
+            <meta name="theme-color" content="#00796B" />
+
+            <meta property="og:site_name" content="TheClashFruit" />
+            <meta property="og:title" content={pageData.title} />
+            <meta property="og:type" content="article" />
+            <meta property="og:locale" content={router.locale} />
+            <meta property="og:url" content="https://theclashfruit.me" />
+            <meta property="og:image" content={pageData.postData.image} />
+            <meta property="og:description" content={pageData.postData.content.replace(/(<([^>]+)>)/gi, "").substring(0, 200).trim()} />
+
+            <meta property="article:published_time" content={new Date(pageData.postData.created * 1000).toISOString()} />
+            <meta property="article:modified_time" content={new Date(pageData.postData.updated * 1000).toISOString()} />
+            <meta property="article:author" content={pageData.postData.author} />
+            <meta property="article:section" content={`Technology`} />
+
+            <link type="application/json+oembed" href={`https://beta.theclashfruit.me/api/oembed?permalink=${pageData.postData.permalink}`} />
+          </>
+        )}
       </Head>
 
       <nav className={`transition z-10 flex items-center bg-slate-300/70 dark:bg-gray-900/70 backdrop-blur-sm lg:justify-between max-lg:flex-col flex-row max-w-5xl lg:mx-auto max-lg:px-3 max-lg:py-3 lg:px-0 fixed top-0 left-0 right-0`} ref={navRef}>
@@ -81,16 +109,16 @@ export default function Navbar({ pageTitle, activePage }) {
         <div className={`max-lg:hidden max-lg:h-full`} ref={navCollapseRef}>
           <ul className={`flex max-lg:flex-1 max-lg:p-4 max-lg:w-screen max-lg:h-full max-lg:items-start max-lg:justify-center max-lg:flex-col`}>
             <li className={`p-3`}>
-              <Link href={activePage === 'home' ? "#" : "/"} className={`max-lg:text-lg text-black dark:text-white ${activePage !== 'home' ? 'text-opacity-60 dark:text-opacity-60' : ''} hover:text-opacity-100 rounded-sm focus:outline outline-teal-700/70 outline-offset-4 outline-2`}>Home</Link>
+              <Link href={pageData.active === 'home' ? "#" : "/"} className={`max-lg:text-lg text-black dark:text-white ${pageData.active !== 'home' ? 'text-opacity-60 dark:text-opacity-60' : ''} hover:text-opacity-100 rounded-sm focus:outline outline-teal-700/70 outline-offset-4 outline-2`}>Home</Link>
             </li>
             <li className={`p-3`}>
-              <Link href={activePage === 'blog' ? "#" : "/blog"} className={`max-lg:text-lg transition text-black ${activePage !== 'blog' ? 'text-opacity-60 dark:text-opacity-60' : ''} dark:text-white hover:text-opacity-100 rounded-sm focus:outline outline-teal-700/70 outline-offset-4 outline-2`}>Blog</Link>
+              <Link href={pageData.active === 'blog' ? "#" : "/blog"} className={`max-lg:text-lg transition text-black ${pageData.active !== 'blog' ? 'text-opacity-60 dark:text-opacity-60' : ''} dark:text-white hover:text-opacity-100 rounded-sm focus:outline outline-teal-700/70 outline-offset-4 outline-2`}>Blog</Link>
             </li>
             <li className={`p-3`}>
-              <Link href={activePage === 'gallery' ? "#" : "/gallery"} className={`max-lg:text-lg transition text-black ${activePage !== 'gallery' ? 'text-opacity-60 dark:text-opacity-60' : ''} dark:text-white hover:text-opacity-100 rounded-sm focus:outline outline-teal-700/70 outline-offset-4 outline-2`}>Gallery</Link>
+              <Link href={pageData.active === 'gallery' ? "#" : "/gallery"} className={`max-lg:text-lg transition text-black ${pageData.active !== 'gallery' ? 'text-opacity-60 dark:text-opacity-60' : ''} dark:text-white hover:text-opacity-100 rounded-sm focus:outline outline-teal-700/70 outline-offset-4 outline-2`}>Gallery</Link>
             </li>
             <li className={`p-3`}>
-              <Link href={activePage === 'contact' ? "#" : "/contact"} className={`max-lg:text-lg transition text-black ${activePage !== 'contact' ? 'text-opacity-60 dark:text-opacity-60' : ''} dark:text-white hover:text-opacity-100 rounded-sm focus:outline outline-teal-700/70 outline-offset-4 outline-2`}>Contact</Link>
+              <Link href={pageData.active === 'contact' ? "#" : "/contact"} className={`max-lg:text-lg transition text-black ${pageData.active !== 'contact' ? 'text-opacity-60 dark:text-opacity-60' : ''} dark:text-white hover:text-opacity-100 rounded-sm focus:outline outline-teal-700/70 outline-offset-4 outline-2`}>Contact</Link>
             </li>
           </ul>
         </div>

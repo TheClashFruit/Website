@@ -2,12 +2,13 @@ import Navbar from '@/components/Navbar';
 import showdown from 'showdown';
 import showdownHighlight from 'showdown-highlight'
 import Hero from '@/components/Hero';
+import SettingsOverlay from '@/components/SettingsOverlay';
 
 export default function Post({ postData }) {
 
   return (
     <>
-      <Navbar pageTitle={postData.title} activePage="post" />
+      <Navbar pageData={{ title: postData.title, active: 'post', type: 'post', postData }} />
 
       <Hero pageType="post" pageData={{ title: postData.title, author: postData.author }} />
 

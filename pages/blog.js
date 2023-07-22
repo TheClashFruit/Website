@@ -10,8 +10,7 @@ export default function Blog({ blogData }) {
 
   return (
     <>
-      <Navbar pageTitle="Blog" activePage="blog" />
-      <SettingsOverlay />
+      <Navbar pageData={{ title: 'Blog', active: 'blog', type: 'page' }} />
 
       <Hero pageType="page" pageData={{ title: 'Blog' }} />
 

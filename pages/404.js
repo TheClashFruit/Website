@@ -26,8 +26,7 @@ export default function Error() {
 
   return (
     <>
-      <Navbar pageTitle="Home" activePage="404" />
-      <SettingsOverlay />
+      <Navbar pageData={{ title: '404 Not Found', active: '404', type: 'page' }} />
 
       <Hero pageType="page" pageData={{ title: '404' }} />
 
