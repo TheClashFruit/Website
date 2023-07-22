@@ -39,6 +39,8 @@ export default function Navbar({ pageData }) {
 
   console.log(langData)
 
+   <link type="application/json+oembed" href={`https://beta.theclashfruit.me/api/oembed?permalink=${pageData.postData.permalink}`} />
+
   */
 
   return (
@@ -69,7 +71,7 @@ export default function Navbar({ pageData }) {
         {pageData.type === 'post' && (
           <>
             <meta name="name" content={`TheClashFruit &bull; ${pageData.title}`} />
-            <meta name="description" content={pageData.postData.content.replace(/(<([^>]+)>)/gi, "").substring(0, 200).trim()} />
+            <meta name="description" content={pageData.postData.content.replace(/(<([^>]+)>)/gi, "").trim()} />
             <meta name="keywords" content={`TheClashFruit, tcf, blokkok, the, clash, fruit, ${pageData.postData.title}`} />
             <meta name="theme-color" content="#00796B" />
 
@@ -79,14 +81,12 @@ export default function Navbar({ pageData }) {
             <meta property="og:locale" content={router.locale} />
             <meta property="og:url" content="https://theclashfruit.me" />
             <meta property="og:image" content={pageData.postData.image} />
-            <meta property="og:description" content={pageData.postData.content.replace(/(<([^>]+)>)/gi, "").substring(0, 200).trim()} />
+            <meta property="og:description" content={pageData.postData.content.replace(/(<([^>]+)>)/gi, "").trim()} />
 
             <meta property="article:published_time" content={new Date(pageData.postData.created * 1000).toISOString()} />
             <meta property="article:modified_time" content={new Date(pageData.postData.updated * 1000).toISOString()} />
             <meta property="article:author" content={pageData.postData.author} />
             <meta property="article:section" content={`Technology`} />
-
-            <link type="application/json+oembed" href={`https://beta.theclashfruit.me/api/oembed?permalink=${pageData.postData.permalink}`} />
           </>
         )}
       </Head>
