@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { getSettings, setSettings } from '@/lib/SettingsLib';
+
 export default function SettingsOverlay() {
   const settingsPanelRef  = useRef();
   const settingsButtonRef = useRef();
@@ -10,18 +12,6 @@ export default function SettingsOverlay() {
   const settingOptionLangRef = useRef();
   const settingOptionBlurRef = useRef();
   const settingOptionTrackingRef = useRef();
-
-  const getSettings = () => {
-    return JSON.parse(localStorage.getItem("tcf_settings")) || { v: 1, theme: 'dark', language: 'en', blur: true, tracking: true, ads: true }
-  }
-
-  const setSettings = (setting, value) => {
-    const oldSettings = getSettings();
-
-    oldSettings[setting] = value;
-
-    localStorage.setItem("tcf_settings", JSON.stringify(oldSettings))
-  }
 
   useEffect(() => {
     if(!localStorage.getItem("tcf_settings"))
