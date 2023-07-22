@@ -87,6 +87,13 @@ export default function Navbar({ pageData }) {
             <meta property="article:modified_time" content={new Date(pageData.postData.updated * 1000).toISOString()} />
             <meta property="article:author" content={pageData.postData.author} />
             <meta property="article:section" content={`Technology`} />
+
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta property="twitter:domain" content="theclashfruit.me" />
+            <meta property="twitter:url" content={`https://theclashfruit.me/post/${pageData.postData.permalink}`} />
+            <meta name="twitter:title" content={pageData.postData.title} />
+            <meta name="twitter:description" content={pageData.postData.content.replace(/(<([^>]+)>)/gi, "").trim()} />
+            <meta name="twitter:image" content={pageData.postData.image} />
           </>
         )}
       </Head>
