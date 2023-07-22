@@ -1,11 +1,36 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function SettingsOverlay() {
   const settingsPanelRef  = useRef();
   const settingsButtonRef = useRef();
   const settingsBgRef = useRef();
 
-  // { v: 1, theme: 'dark', language: 'en', blur: true, tracking: true, ads: true }
+
+  const settingOptionThemeRef = useRef();
+  const settingOptionLangRef = useRef();
+  const settingOptionBlurRef = useRef();
+  const settingOptionTrackingRef = useRef();
+
+  const getSettings = () => {
+    return JSON.parse(localStorage.getItem("tcf_settings")) || { v: 1, theme: 'dark', language: 'en', blur: true, tracking: true, ads: true }
+  }
+
+  const setSettings = (setting, value) => {
+    const oldSettings = getSettings();
+
+    oldSettings[setting] = value;
+
+    localStorage.setItem("tcf_settings", JSON.stringify(oldSettings))
+  }
+
+  useEffect(() => {
+    if(!localStorage.getItem("tcf_settings"))
+      localStorage.setItem("tcf_settings", JSON.stringify({ v: 1, theme: window.matchMedia("(prefers-color-scheme: dark)") ? 'dark' : 'light', language: 'en', blur: true, tracking: true, ads: true }))
+
+    settingOptionThemeRef.current.value = getSettings().theme;
+    settingOptionBlurRef.current.checked = getSettings().blur;
+    settingOptionTrackingRef.current.checked = getSettings().tracking;
+  }, [ setSettings, getSettings ]);
 
   const onSettingsButtonClick = () => {
     settingsPanelRef.current.classList.toggle('hidden');
@@ -25,9 +50,9 @@ export default function SettingsOverlay() {
             <label className={`font-bold`}>Theme</label>
             <label>Choose your preferred theme.</label>
           </div>
-          <select className={`rounded-md border-gray-950/50 bg-gray-950/40 accent-teal-700 cursor-pointer`}>
-            <option>Dark</option>
-            <option>Light</option>
+          <select className={`rounded-md border-gray-950/50 bg-gray-950/40 accent-teal-700 cursor-pointer`} onChange={(e) => { setSettings('theme', e.target.value) }} ref={settingOptionThemeRef}>
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
           </select>
         </div>
 
@@ -49,7 +74,7 @@ export default function SettingsOverlay() {
             <label className={`font-bold`}>Blur Effects</label>
             <label>Disable it if it hurts performance.</label>
           </div>
-          <input type="checkbox" className={`rounded-md border-gray-950/50 bg-gray-950/40 accent-teal-700 cursor-pointer`} />
+          <input type="checkbox" className={`rounded-md border-gray-950/50 bg-gray-950/40 accent-teal-700 cursor-pointer`} onChange={(e) => { setSettings('blur', e.target.checked) }} ref={settingOptionBlurRef} />
         </div>
 
         <div className={`flex justify-between items-center mb-2`}>
@@ -57,7 +82,7 @@ export default function SettingsOverlay() {
             <label className={`font-bold`}>Analytics</label>
             <label>Disable it if you want to opt out from analytics.</label>
           </div>
-          <input type="checkbox" className={`rounded-md border-gray-950/50 bg-gray-950/40 accent-teal-700 cursor-pointer`} />
+          <input type="checkbox" className={`rounded-md border-gray-950/50 bg-gray-950/40 accent-teal-700 cursor-pointer`} onChange={(e) => { setSettings('tracking', e.target.checked) }} ref={settingOptionTrackingRef} />
         </div>
 
         <div className={`hidden`}>
@@ -65,7 +90,7 @@ export default function SettingsOverlay() {
             <label className={`font-bold`}>Advertisements</label>
             <label>You can also consider supporting me by donating.</label>
           </div>
-          <input type="checkbox" className={`rounded-md border-gray-950/50 bg-gray-950/40 accent-teal-700 cursor-pointer`} />
+          <input type="checkbox" className={`rounded-md border-gray-950/50 bg-gray-950/40 accent-teal-700 cursor-pointer`} onChange={(e) => { setSettings('ads', e.target.checked) }} />
         </div>
       </div>
 
