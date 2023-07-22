@@ -1,7 +1,9 @@
-import buildId from 'next-build-id';
+import fs from 'fs';
 
 export default async function handler(req, res) {
-  const BUILD_ID = await buildId();
+  const fileBuffer = fs.readFileSync(".next/BUILD_ID")
+
+  const BUILD_ID = fileBuffer.toString();
 
   const commitFetch = await fetch(`https://git.theclashfruit.me/api/v1/repos/TheClashFruit/Website/commits?sha=${BUILD_ID}&limit=1`)
   const commitData = await commitFetch.json()
