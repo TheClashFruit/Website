@@ -1,8 +1,8 @@
 import Navbar from '@/components/Navbar';
-import SettingsOverlay from '@/components/SettingsOverlay';
 import Link from 'next/link';
 import Hero from '@/components/Hero';
 import Main from '@/components/Main';
+import Footer from '@/components/Footer';
 
 export default function NotFound() {
   const textPool = [
@@ -40,6 +40,8 @@ export default function NotFound() {
         <h4>Just a message for you:</h4>
         <pre suppressHydrationWarning={true}>{randomText}</pre>
       </Main>
+
+      <Footer />
     </>
   )
 }

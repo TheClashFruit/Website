@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
 
 export default function Navbar({ pageData }) {

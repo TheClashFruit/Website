@@ -2,8 +2,6 @@ import Navbar from '@/components/Navbar';
 import showdown from 'showdown';
 import showdownHighlight from 'showdown-highlight'
 import Hero from '@/components/Hero';
-import SettingsOverlay from '@/components/SettingsOverlay';
-import { notFound } from 'next/navigation';
 
 import 'showdown-youtube';
 import footnotes from 'showdown-footnotes';

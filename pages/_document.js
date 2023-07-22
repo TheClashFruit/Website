@@ -1,5 +1,4 @@
 import { Html, Head, Main, NextScript } from 'next/document'
-import SettingsOverlay from '@/components/SettingsOverlay';
 
 export default function Document() {
   return (
