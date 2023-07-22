@@ -1,5 +1,7 @@
-export default function handler(req, res) {
+import buildId from 'next-build-id';
+
+export default async function handler(req, res) {
   res.status(200).json({
-    buildId: process.env.BUILD_ID,
+    buildId: await buildId({ dir: __dirname }),
   })
 }
