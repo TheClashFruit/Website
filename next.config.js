@@ -6,6 +6,10 @@ const nextConfig = {
   sassOptions: {
     includePaths: [ path.join(__dirname, 'styles') ],
   },
+  experimental: {
+    esmExternals: "loose",
+    serverComponentsExternalPackages: ["mongoose"]
+  },
   generateBuildId: async () => {
     const commitFetch = await fetch('https://git.theclashfruit.me/api/v1/repos/TheClashFruit/Website/commits?sha=main&limit=1')
     const commitData = await commitFetch.json()
