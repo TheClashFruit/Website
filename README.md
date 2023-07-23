@@ -4,7 +4,7 @@
 
 <p align="center">
   <img alt="Issues" src="https://img.shields.io/badge/dynamic/json?color=yellow&label=issues&query=%24.open_issues_count&url=https%3A%2F%2Fgit.theclashfruit.me%2Fapi%2Fv1%2Frepos%2FTheClashFruit%2FWebsite">
-  <img alt="Pull Requests" src="https://img.shields.io/badge/dynamic/json?color=brightgreen&label=pull requests&query=%24.open_pr_counter&url=https%3A%2F%2Fgit.theclashfruit.me%2Fapi%2Fv1%2Frepos%2FTheClashFruit%2FWebsite">
+  <img alt="Pull Requests" src="https://img.shields.io/badge/dynamic/json?color=brightgreen&label=pull%20requests&query=%24.open_pr_counter&url=https%3A%2F%2Fgit.theclashfruit.me%2Fapi%2Fv1%2Frepos%2FTheClashFruit%2FWebsite">
 
   <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fbeta.theclashfruit.me">
 
