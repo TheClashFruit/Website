@@ -36,6 +36,7 @@ export default function NotFound() {
         <ul>
           <li>The <Link href="/">home</Link>page.</li>
           <li>My <Link href="/blog">blog</Link>.</li>
+          <li>My <Link href="/projects">project</Link>s.</li>
         </ul>
         <h4>Just a message for you:</h4>
         <pre suppressHydrationWarning={true}>{randomText}</pre>

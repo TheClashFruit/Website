@@ -13,7 +13,9 @@ export default function Home() {
       <Hero pageType="page" pageData={{ title: 'Home' }} />
 
       <Main>
-        <p>Home</p>
+        <p>Hi! I'm TheClashFruit, I like to make websites, discord bots and more related to programming.</p>
+
+        <h2 className={`text-2xl font-serif font-medium my-4`}>Skills</h2>
       </Main>
 
       <Footer />

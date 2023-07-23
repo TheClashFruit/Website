@@ -5,6 +5,8 @@ import Hero from '@/components/Hero';
 
 import 'showdown-youtube';
 import footnotes from 'showdown-footnotes';
+import Footer from '@/components/Footer';
+import Link from 'next/link';
 
 export default function Post({ postData }) {
   return (
@@ -14,6 +16,8 @@ export default function Post({ postData }) {
       <Hero pageType="post" pageData={{ title: postData.title, author: postData.author }} />
 
       <article className={`prose my-4 dark:prose-invert max-w-5xl lg:mx-auto max-lg:px-4 lg:px-0`} dangerouslySetInnerHTML={{ __html: postData.content }} />
+
+      <Footer />
     </>
   )
 }

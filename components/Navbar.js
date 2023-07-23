@@ -123,6 +123,9 @@ export default function Navbar({ pageData }) {
                 <Link href={pageData.active === 'blog' ? "#" : "/blog"} className={`max-lg:text-lg transition text-black ${pageData.active !== 'blog' ? 'text-opacity-60 dark:text-opacity-60' : ''} dark:text-white hover:text-opacity-100 rounded-sm focus:outline outline-teal-700/70 outline-offset-4 outline-2`}>Blog</Link>
               </li>
               <li className={`p-3`}>
+                <Link href={pageData.active === 'projects' ? "#" : "/projects"} className={`max-lg:text-lg transition text-black ${pageData.active !== 'projects' ? 'text-opacity-60 dark:text-opacity-60' : ''} dark:text-white hover:text-opacity-100 rounded-sm focus:outline outline-teal-700/70 outline-offset-4 outline-2`}>Projects</Link>
+              </li>
+              <li className={`p-3`}>
                 <Link href={pageData.active === 'gallery' ? "#" : "/gallery"} className={`max-lg:text-lg transition text-black ${pageData.active !== 'gallery' ? 'text-opacity-60 dark:text-opacity-60' : ''} dark:text-white hover:text-opacity-100 rounded-sm focus:outline outline-teal-700/70 outline-offset-4 outline-2`}>Gallery</Link>
               </li>
               <li className={`p-3`}>
