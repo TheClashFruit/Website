@@ -8,7 +8,7 @@
 
   <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fbeta.theclashfruit.me">
 
-  <img alt="License (MIT)" src="https://img.shields.io/badge/license-Apache 2.0-red.svg">
+  <img alt="License (Apache 2.0)" src="https://img.shields.io/badge/license-Apache%202.0-red.svg">
 </p>
 
 <p align="center">
