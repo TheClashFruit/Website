@@ -96,6 +96,8 @@ export default function Navbar({ pageData }) {
             <meta name="twitter:image" content={pageData.postData.image} />
           </>
         )}
+
+        <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1510964912637528" crossorigin="anonymous"></script>
       </Head>
 
       <nav className={`transition z-10 bg-slate-300/70 dark:bg-gray-900/70 backdrop-blur-sm fixed top-0 left-0 right-0`} ref={navRef}>
