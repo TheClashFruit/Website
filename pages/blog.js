@@ -19,7 +19,7 @@ export default function Blog({ blogData }) {
           blog.ad ? (
             <AdBanner
               data-ad-slot="5301256152"
-              data-ad-layout-key="-5n+cf+25-c4+d4"
+              data-ad-layout-key="-62+di+47-55+1l"
               data-ad-format="fluid"
             />
           ) : (
