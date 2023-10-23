@@ -18,10 +18,12 @@ export default function Post({ postData }) {
 
       <article className={`prose my-4 dark:prose-invert max-w-5xl lg:mx-auto max-lg:px-4 lg:px-0`} dangerouslySetInnerHTML={{ __html: postData.content }} />
 
-      <AdBanner 
-        data-ad-format="autorelaxed"
-        data-ad-slot="7154228020"
-      />
+      <div className="max-w-5xl pb-4 lg:mx-auto max-lg:px-4 lg:px-0">
+        <AdBanner 
+          data-ad-format="autorelaxed"
+          data-ad-slot="7154228020"
+        />
+      </div>
 
       <Footer />
     </>
