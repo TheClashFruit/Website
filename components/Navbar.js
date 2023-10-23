@@ -98,8 +98,6 @@ export default function Navbar({ pageData }) {
         )}
 
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1510964912637528" crossorigin="anonymous"></script>
-        <script async src="https://fundingchoicesmessages.google.com/i/pub-1510964912637528?ers=1" nonce="uCNb9CzFEHwxa-GKmVbrTA"></script>
-        <script nonce="uCNb9CzFEHwxa-GKmVbrTA">(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
       </Head>
 
       <nav className={`transition z-10 bg-slate-300/70 dark:bg-gray-900/70 backdrop-blur-sm fixed top-0 left-0 right-0`} ref={navRef}>
