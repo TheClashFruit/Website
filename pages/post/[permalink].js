@@ -19,9 +19,11 @@ export default function Post({ postData }) {
       <article className={`prose my-4 dark:prose-invert max-w-5xl lg:mx-auto max-lg:px-4 lg:px-0`} dangerouslySetInnerHTML={{ __html: postData.content }} />
 
       <div className="max-w-5xl pb-4 lg:mx-auto max-lg:px-4 lg:px-0">
-        <AdBanner 
-          data-ad-format="autorelaxed"
-          data-ad-slot="7154228020"
+        <AdBanner
+          data-ad-slot="6363427510"
+          data-ad-layout-key="-62+di+47-55+1l"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
         />
       </div>
 
