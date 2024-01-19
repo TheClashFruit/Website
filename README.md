@@ -15,6 +15,10 @@
   My website written with Next.JS and Tailwind.
 </p>
 
+## New Version!
+
+I'm doing a redesign over on the [`dev/redesign`](https://git.theclashfruit.me/TheClashFruit/Website/src/branch/dev/redesign) branch, it's the deployed version on [beta.theclashfruit.me](https://beta.theclashfruit.me).
+
 ## Developing
 
 1. Set `DATABASE_CONN` to your MongoDB connection string in `.env.local`.
