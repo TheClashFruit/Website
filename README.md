@@ -1,4 +1,4 @@
-![Website Banner](https://cdn.theclashfruit.me/git/Website/web_banner.svg)
+<img alt="Website Banner" src="https://cdn-new.theclashfruit.me/forgejo/website/banner.svg" width="100%">
 
 <h1 align="center">Website</h1>
 
@@ -12,15 +12,15 @@
 </p>
 
 <p align="center">
-  My website written with Next.JS and Tailwind.
+  My website written with Next.js.
 </p>
 
 ## Developing
 
-1. Set `DATABASE_CONN` to your MongoDB connection string in `.env.local`.
-2. Install dependencies with `npm install`.
-3. Run the development server with `npm run dev`.
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+<!-- 1. Set `DATABASE_CONN` to your MongoDB connection string in `.env.local`. -->
+1. Install dependencies with `npm install`.
+2. Run the development server with `npm run dev`.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Contributing
 
@@ -29,7 +29,7 @@ Feel free to contribute, just make sure you are following design patterns I used
 ## License
 
 ```
-Copyright 2023 TheClashFruit
+Copyright 2023 - 2024 TheClashFruit
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

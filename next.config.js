@@ -4,11 +4,7 @@ const path = require('path');
 const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
-    includePaths: [ path.join(__dirname, 'styles') ],
-  },
-  experimental: {
-    esmExternals: "loose",
-    serverComponentsExternalPackages: ["mongoose"]
+    includePaths: [ path.join(__dirname, 'styles') ]
   },
   generateBuildId: async () => {
     const commitFetch = await fetch('https://git.theclashfruit.me/api/v1/repos/TheClashFruit/Website/commits?sha=main&limit=1')
@@ -16,49 +12,27 @@ const nextConfig = {
 
     return commitData[0].sha
   },
-  redirects: async () => {
-    return [
-      {
-        source: '/post/:year/:permalink',
-        destination: '/post/:permalink',
-        permanent: true,
-      },
-    ]
-  },
   headers: async () => {
     return [
       {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=5184000; includeSubDomains'
-          }
-        ]
-      },
-      {
         source: '/api/:path*',
         headers: [
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=5184000; includeSubDomains'
-          },
           {
             key: 'Access-Control-Allow-Origin',
             value: '*'
           }
         ]
       }
-    ]
+    ];
+  },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: [ '@svgr/webpack' ]
+    });
+
+    return config;
   }
-}
+};
 
-module.exports = nextConfig
-
-
-/*
- i18n: {
-   locales: ['en', 'hu', 'fr', 'de'],
-   defaultLocale: 'en'
- },
-*/
+module.exports = nextConfig;
