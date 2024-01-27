@@ -476,7 +476,7 @@ export default function Home() {
         </div>
       </main>
 
-      <Footer/>
+      <Footer shareData={{ title: 'TheClashFruit', text: 'Check out TheClashFruit\'s site!', url: 'https://theclashfruit.me' }} />
     </>
   );
 }

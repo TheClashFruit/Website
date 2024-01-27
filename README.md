@@ -17,10 +17,17 @@
 
 ## Developing
 
-<!-- 1. Set `DATABASE_CONN` to your MongoDB connection string in `.env.local`. -->
-1. Install dependencies with `npm install`.
-2. Run the development server with `npm run dev`.
-3. Open [http://localhost:3000](http://localhost:3000) in your browser.
+1. Install dependencies with `pnpm install`.
+2. Copy `.env` to `.env.local` and fill in the values.
+3. Set up the database from `tools/setup.sql` if needed.
+4. Run the development server with `pnpm run dev`.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Deploying
+
+1. Install dependencies with `pnpm install`.
+2. Run `node tools/setup.mjs` to set up env variables and the database and build the code.
+3. Run `pnpm start` to start the production server.
 
 ## Contributing
 

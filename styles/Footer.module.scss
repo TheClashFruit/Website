@@ -7,9 +7,42 @@
 
   padding: 16px;
 
+  > .container {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  p:not(:last-child) {
+    margin-bottom: 4px;
+  }
+
   @media (prefers-color-scheme: dark) {
     background: $colorSurfaceDark2;
 
     border-color: rgba($colorBorderDark2, 0.3);
   }
+
+  @media (max-width: 768px) {
+    > .container {
+      flex-direction: column;
+
+      justify-content: center;
+
+      gap: 1rem;
+
+      p {
+        text-align: center;
+      }
+    }
+  }
+}
+
+.socialIcons {
+  display: flex;
+
+  list-style: none;
+
+  gap: 8px;
 }

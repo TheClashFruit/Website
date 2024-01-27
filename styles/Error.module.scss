@@ -1,0 +1,19 @@
+@import 'global.module';
+
+.container {
+  height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  flex-direction: column;
+
+  > h1 {
+    margin-bottom: 0.3rem;
+  }
+
+  > p {
+    margin-bottom: 1rem;
+  }
+}
