@@ -78,5 +78,15 @@ main {
 pre, code {
   tab-size: 2;
 
-  font-family: 'Fira Code', 'Noto Color Emoji', 'Noto Emoji', sans-serif;
+  font-family: 'Fira Code', 'Noto Color Emoji', 'Noto Emoji', monospace;
+}
+
+.swagger-ui {
+  font-family: 'Rethink Sans', 'Noto Color Emoji', 'Noto Emoji', sans-serif !important;
+
+  pre, code {
+    tab-size: 2;
+
+    font-family: 'Fira Code', 'Noto Color Emoji', 'Noto Emoji', monospace !important;
+  }
 }

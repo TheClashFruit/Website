@@ -1,9 +1,9 @@
 import '@/styles/globals.scss';
+
 import ConsentBanner from '@/components/ConsentBanner';
 import { init, push } from '@socialgouv/matomo-next';
 
 import {useEffect, useState} from 'react';
-import Meta from '@/components/Meta';
 
 export default function App({ Component, pageProps }) {
   const [ isDismissed, setIsDismissed ] = useState(true);
