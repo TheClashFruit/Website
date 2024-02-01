@@ -5,7 +5,7 @@ import Database from '@/lib/database';
 
 export default function handler(req, res) {
   const resp = {
-    latest_version: 0,
+    latest_version: 1,
     build_id: null,
     swagger: {
       data: 'https://cdn-new.theclashfruit.me/data/swagger.json',
@@ -15,10 +15,15 @@ export default function handler(req, res) {
       {
         name: '1.0.0',
         path: '/api/v1',
+        deprecated: true
+      },
+      {
+        name: '2.0.0',
+        path: '/api/v2',
         deprecated: false
       }
     ]
-  }
+  };
 
   const db = new Database();
 

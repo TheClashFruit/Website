@@ -34,7 +34,7 @@ const rl = readline.createInterface({
 const ask = () => {
   console.clear();
 
-  console.log(`${chalk.bold.green('Setup Script')}    ${chalk.blue('v1.0.0')}`);
+  console.log(`${chalk.bold.green('Setup Script')}    ${chalk.blue('v2.0.0')}`);
 
   if (env.DB_NAME !== undefined && env.DB_USER !== undefined && env.DB_PASS !== undefined && env.DB_HOST !== undefined && env.DB_PORT !== undefined) {
     console.log('');
@@ -62,7 +62,7 @@ const ask = () => {
       } else if (answer.toLowerCase() === 'n') {
         console.clear();
 
-        console.log(`${chalk.bold.green('Setup Script')}    ${chalk.blue('v1.0.0')}`);
+        console.log(`${chalk.bold.green('Setup Script')}    ${chalk.blue('v2.0.0')}`);
         console.log('');
         console.log(chalk.bold('Please enter the correct values:'));
 
@@ -149,13 +149,22 @@ const setupDatabase = async () => {
       if (answer) {
         createUser();
       } else {
-        build();
+        askYesNoQuestion('Do you want to build the project?', answer => {
+          if (answer) {
+            build();
+          } else {
+            console.log(chalk.bold.green('Setup Complete.'));
+
+            rl.close();
+            process.exit(0);
+          }
+        });
       }
     });
   } catch (err) {
     console.clear();
 
-    console.log(`${chalk.bold.green('Setup Script')}    ${chalk.blue('v1.0.0')}`);
+    console.log(`${chalk.bold.green('Setup Script')}    ${chalk.blue('v2.0.0')}`);
     console.log('');
     console.log(chalk.bold.red(err.message));
 
@@ -183,7 +192,7 @@ const user = {
 const createUser = async () => {
   console.clear();
 
-  console.log(`${chalk.bold.green('Setup Script')}    ${chalk.blue('v1.0.0')}`);
+  console.log(`${chalk.bold.green('Setup Script')}    ${chalk.blue('v2.0.0')}`);
   console.log('');
   console.log(chalk.bold('Please enter the following values:'));
 
@@ -230,7 +239,7 @@ const createUser = async () => {
         } catch (err) {
           console.clear();
 
-          console.log(`${chalk.bold.green('Setup Script')}    ${chalk.blue('v1.0.0')}`);
+          console.log(`${chalk.bold.green('Setup Script')}    ${chalk.blue('v2.0.0')}`);
           console.log('');
           console.log(chalk.bold.red(err.message));
 

@@ -13,6 +13,7 @@ CREATE TABLE `users` (
 CREATE TABLE `posts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
+  `license_id` int(11) NOT NULL,
   `permalink` varchar(255) NOT NULL,
   `tags` varchar(255) NOT NULL,
   `title` varchar(50) NOT NULL,
@@ -20,46 +21,58 @@ CREATE TABLE `posts` (
   `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY(`id`),
-  INDEX(`user_id`)
+  INDEX(`user_id`),
+  INDEX(`license_id`)
 );
 ###
 CREATE TABLE `projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `license_id` int(11) NOT NULL,
   `permalink` varchar(255) NOT NULL,
   `tags` varchar(255) NOT NULL,
+  `icon` varchar(2048) NOT NULL,
   `title` varchar(50) NOT NULL,
+  `short_readme` varchar(255) NOT NULL,
   `readme` LONGTEXT NOT NULL,
   `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY(`id`)
+  PRIMARY KEY(`id`),
+  INDEX(`user_id`),
+  INDEX(`license_id`)
 );
 ###
 CREATE TABLE `gallery` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
   `license_id` int(11) NOT NULL,
   `tags` varchar(255) NOT NULL,
   `title` varchar(50) NOT NULL,
   `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY(`id`),
+  INDEX(`user_id`),
   INDEX(`license_id`)
 );
 ###
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `post_id` int(11) NOT NULL,
+  `ip` varchar(48) NOT NULL,
   `name` varchar(50) NOT NULL,
+  `email` varchar(320) NOT NULL,
   `comment` varchar(512) NOT NULL,
   PRIMARY KEY(`id`),
   INDEX(`post_id`)
 );
 ###
-CREATE TABLE `downloads` (
+CREATE TABLE `versions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
-  `download_type` varchar(50) NOT NULL,
+  `version` varchar(50) NOT NULL,
+  `type` int(11) NOT NULL,
   `url` varchar(2048) NOT NULL,
-  `uses` int(11) NOT NULL DEFAULT 0,
+  `downloads` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY(`id`),
   INDEX(`project_id`)
 );
@@ -75,8 +88,16 @@ CREATE TABLE `licenses` (
 ###
 ALTER TABLE `comments` ADD FOREIGN KEY (`post_id`) REFERENCES `posts`(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 ###
-ALTER TABLE `downloads` ADD FOREIGN KEY (`project_id`) REFERENCES `projects`(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
-###
-ALTER TABLE `posts` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `versions` ADD FOREIGN KEY (`project_id`) REFERENCES `projects`(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 ###
 ALTER TABLE `gallery` ADD FOREIGN KEY (`license_id`) REFERENCES `licenses`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+###
+ALTER TABLE `projects` ADD FOREIGN KEY (`license_id`) REFERENCES `licenses`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+###
+ALTER TABLE `posts` ADD FOREIGN KEY (`license_id`) REFERENCES `licenses`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+###
+ALTER TABLE `gallery` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+###
+ALTER TABLE `projects` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+###
+ALTER TABLE `posts` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
