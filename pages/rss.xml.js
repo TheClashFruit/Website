@@ -1,5 +1,13 @@
 import RSS from 'rss';
 
+import Database from '@/lib/Database';
+
+import showdown from 'showdown';
+import showdownHighlight from 'showdown-highlight';
+import footnotes from 'showdown-footnotes';
+
+import 'showdown-youtube';
+
 export default function RssFeed() {
   // it's the server's job!
 }
@@ -16,8 +24,34 @@ export async function getServerSideProps({ res }) {
   };
 
   const feed = new RSS(feedOptions);
+  const db   = new Database();
 
-  // items tba
+  const converter = new showdown.Converter({
+    extensions: [
+      showdownHighlight({
+        pre: true,
+        auto_detection: true
+      }),
+      'youtube',
+      footnotes
+    ]
+  });
+
+  converter.setFlavor('github');
+
+  const posts = await db.getPosts();
+
+  posts.forEach((post) => {
+    const html = converter.makeHtml(post.content);
+
+    feed.item({
+      title: post.title,
+      description: html,
+      url: `https://theclashfruit.me/post/${post.permalink}`,
+      guid: post.permalink,
+      categories: post.categories
+    });
+  });
 
   res.setHeader('Content-Type', 'text/xml');
   res.write(feed.xml({ indent: true }));

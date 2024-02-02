@@ -1,6 +1,7 @@
 import Meta from '@/components/Meta';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 
 import styles from '@/styles/Projects.module.scss';
 
@@ -8,13 +9,9 @@ export default function Projects() {
   return (
     <>
       <Meta pageData={{ title: 'Projects', type: 'page' }} />
-      <Navbar page="projects" />
 
-      <header>
-        <div className={styles.container}>
-          <h1>Projects</h1>
-        </div>
-      </header>
+      <Navbar page="projects" />
+      <Header title="Projects" />
 
       <main>
         <div className={styles.container}>

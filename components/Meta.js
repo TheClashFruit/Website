@@ -9,8 +9,8 @@ export default function Meta({ pageData }) {
     <Head>
       <title>TheClashFruit &bull; {pageData.title}</title>
 
-      <link href="/favicon_light.ico" rel="icon" type="image/x-icon" media="(prefers-color-scheme: light)"/>
-      <link href="/favicon_dark.ico" rel="icon" type="image/x-icon" media="(prefers-color-scheme: dark)"/>
+      <link rel="icon" href="/favicon_light.ico" type="image/x-icon" media="(prefers-color-scheme: light)" />
+      <link rel="icon" href="/favicon_dark.ico"  type="image/x-icon" media="(prefers-color-scheme: dark)" />
 
       <meta property="tcf:page_data" content={JSON.stringify(pageData)}/>
 
@@ -31,7 +31,7 @@ export default function Meta({ pageData }) {
         </>
       )}
 
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1510964912637528" crossOrigin="anonymous" />
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1510964912637528" crossOrigin="anonymous"/>
     </Head>
   );
 }

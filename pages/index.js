@@ -112,7 +112,7 @@ export default function Home() {
                 <Button href="https://discord.gg/CWEApqJ6rc" target="_blank" rel="noopener noreferrer me" icon={SiDiscord} type="icon" title="Discord"/>
               </li>
               <li>
-                <Button href="https://mas.to/@TheClashFruit" target="_blank" rel="noopener noreferrer me" icon={SiMastodon} type="icon" title="Mastodon"/>
+                <Button href="https://wetdry.world/@TheClashFruit" target="_blank" rel="noopener noreferrer me" icon={SiMastodon} type="icon" title="Mastodon"/>
               </li>
               <li>
                 <Button href="https://modrinth.com/user/TheClashFruit" target="_blank" rel="noopener noreferrer me" icon={SiModrinth} type="icon" title="Modrinth"/>

@@ -10,9 +10,14 @@ import {
 
 import Button from '@/components/Button';
 
-export default function Header({ shareData }) {
+import {
+  forwardRef
+} from 'react';
+
+// eslint-disable-next-line react/display-name
+const Footer = forwardRef(({ shareData }, ref) => {
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} ref={ref}>
       <div className={styles.container}>
         <div>
           <p>Copyright &copy; {new Date().getFullYear()} TheClashFruit.</p>
@@ -35,4 +40,6 @@ export default function Header({ shareData }) {
       </div>
     </footer>
   );
-}
+});
+
+export default Footer;
