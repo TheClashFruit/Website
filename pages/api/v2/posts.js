@@ -1,4 +1,4 @@
-import Database from '@/lib/Database';
+import Database from '../../../lib/Database';
 
 export default async function handler(req, res) {
   const db = new Database();
