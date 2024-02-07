@@ -1,7 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import fs from 'fs';
-import Database from '@/lib/database';
 
 export default function handler(req, res) {
   const resp = {
@@ -24,8 +23,6 @@ export default function handler(req, res) {
       }
     ]
   };
-
-  const db = new Database();
 
   try {
     resp.build_id = fs.readFileSync('.next/BUILD_ID', 'utf8');
