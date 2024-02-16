@@ -159,4 +159,8 @@
       }
     }
   }
+
+  @media print {
+    display: none;
+  }
 }

@@ -260,4 +260,17 @@ textarea.inputText {
 
     align-items: end;
   }
+
+  @media print {
+    min-height: 0;
+    height: fit-content;
+
+    text-align: center;
+
+    h1 {
+      width: 100%;
+    }
+
+    margin-bottom: 2rem;
+  }
 }

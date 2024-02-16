@@ -37,6 +37,42 @@
       }
     }
   }
+
+  @media print {
+    border-top: none;
+
+    padding: 0;
+
+    > .container > div:first-child {
+      width: 100%;
+
+      text-align: center;
+
+      p:last-child {
+        visibility: hidden;
+
+        position: relative;
+
+        pointer-events: none;
+
+        &:after {
+          content: 'You like printing don\'t you?';
+
+          visibility: visible;
+
+          display: block;
+
+          position: absolute;
+
+          top: 0;
+
+          width: 100%;
+        }
+      }
+    }
+
+    margin-top: 2rem;
+  }
 }
 
 .socialIcons {
@@ -45,4 +81,8 @@
   list-style: none;
 
   gap: 8px;
+
+  @media print {
+    display: none;
+  }
 }
