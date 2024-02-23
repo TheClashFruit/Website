@@ -274,3 +274,17 @@ textarea.inputText {
     margin-bottom: 2rem;
   }
 }
+
+.paginator {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  > .pageNumbers {
+    display: flex;
+
+    gap: 8px;
+  }
+}
