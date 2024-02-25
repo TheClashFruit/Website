@@ -1,0 +1,166 @@
+@import 'global.module';
+
+.navBar {
+  position: fixed;
+
+  top: 0;
+
+  right: 0;
+  left: 0;
+
+  transition: background 0.2s ease-in-out, border 0.2s ease-in-out, backdrop-filter 0.2s ease-in-out;
+
+  border-bottom: 1px solid transparent;
+
+  z-index: 10;
+
+  > .container {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0.5rem 0;
+
+    > .navLogoContainer {
+      flex-grow: 1;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      > .navLogo {
+        fill: #0F766E;
+      }
+
+      > .navToggle {
+        display: none;
+
+        @media (max-width: 768px) {
+          display: flex;
+        }
+      }
+    }
+
+    > .navCollapse {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      flex-grow: 1;
+
+      > ul {
+        list-style: none;
+
+        display: flex;
+
+        gap: 2px;
+
+        &.navLinks {
+          > li {
+            > a {
+              color: rgba($colorTextLight1, 0.75);
+
+              text-decoration: none;
+
+              padding: 8px 16px;
+
+              transition: color 0.1s ease-in-out;
+
+              &:hover, &.active {
+                color: rgba($colorTextLight1, 1);
+              }
+
+              @media (prefers-color-scheme: dark) {
+                color: rgba($colorTextDark1, 0.75);
+
+                &:hover, &.active {
+                  color: rgba($colorTextDark1, 1);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &.open {
+        display: flex;
+      }
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  &.navBarScrolled, &.open {
+    background: $colorSurfaceLight2;
+
+    border-bottom: 1px solid rgba($colorBorderLight2, 0.3);
+
+    @media (prefers-color-scheme: dark) {
+      background: $colorSurfaceDark2;
+
+      border-bottom: 1px solid rgba($colorBorderDark2, 0.3);
+    }
+  }
+
+  &.open {
+    height: 100vh;
+
+    background: rgba($colorSurfaceLight2, 0.95);
+
+    backdrop-filter: blur(0.5rem);
+
+    @media (prefers-color-scheme: dark) {
+      background: rgba($colorSurfaceDark2, 0.95);
+    }
+
+    > .container {
+      flex-direction: column;
+
+      height: 100%;
+
+      > .navLogoContainer {
+        width: 100%;
+
+        flex-grow: 0;
+
+        margin-bottom: 0.5rem;
+      }
+
+      > .navCollapse {
+        width: 100%;
+
+        flex-grow: 1;
+        flex-direction: column;
+
+        align-items: end;
+        justify-content: center;
+
+        gap: 2rem;
+
+        > .navLinks {
+          flex-grow: 0;
+          flex-direction: column;
+
+          align-items: end;
+
+          > li {
+            padding: .5rem 0 .5rem 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media print {
+    display: none;
+  }
+}

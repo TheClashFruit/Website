@@ -1,20 +1,47 @@
+import Meta from '@/components/Meta';
 import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import Main from '@/components/Main';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 
-export default function Projects() {
+import styles from '@/styles/Projects.module.scss';
+import Database from '@/lib/Database';
+import Paginator from '@/components/Paginator';
+
+export default function Projects({ projects, page, totalPages }) {
   return (
     <>
-      <Navbar pageData={{ title: 'Projects', active: 'projects', type: 'page' }} />
+      <Meta pageData={{ title: 'Projects', type: 'page' }} />
 
-      <Hero pageType="page" pageData={{ title: 'Projects' }} />
+      <Navbar page="projects" />
+      <Header title="Projects" />
 
-      <Main>
-        bye
-      </Main>
+      <main>
+        <div className={styles.container}>
+          <Paginator page={Number.parseInt(page)} totalPages={Number.parseInt(totalPages)} />
+        </div>
+      </main>
 
-      <Footer />
+      <Footer shareData={{ title: 'Projects', text: 'Check out TheClashFruit\'s projects!', url: 'https://theclashfruit.me/projects' }} />
     </>
-  )
+  );
+}
+
+export async function getServerSideProps({ query }) {
+  const db = new Database();
+
+  const page = {
+    offset: query.page !== undefined ? Math.floor((query.page - 1) * 10) : 0,
+    limit: query.page !== undefined ? Math.floor((query.page - 1) * 10) + 10 : 10
+  };
+
+  const projects = await db.getProjects(page.offset, page.limit);
+  const totalProjects = await db.getProjectCount();
+
+  return {
+    props: {
+      projects,
+      page: query.page !== undefined ? query.page : 1,
+      totalPages: Math.ceil(totalProjects / 10)
+    },
+  };
 }

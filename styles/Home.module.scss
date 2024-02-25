@@ -1,0 +1,82 @@
+@import 'global.module';
+
+.hero {
+  height: 100svh;
+
+  padding-top: 57px;
+  padding-bottom: 1rem;
+
+  > .container {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    height: 100%;
+
+    > .heroTop {
+      display: flex;
+
+      justify-content: center;
+
+      flex-direction: column;
+
+      flex-grow: 1;
+
+      width: 100%;
+
+      > h1 {
+        font-weight: 700;
+
+        margin-bottom: .5rem;
+      }
+
+      > .socialIcons {
+        margin-top: 1rem;
+
+        display: flex;
+
+        list-style: none;
+
+        gap: 8px;
+      }
+    }
+  }
+}
+
+.skillsGrid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+  gap: 1rem;
+
+  > .skillCard {
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.5rem;
+
+    > .skillInner {
+      flex-grow: 1;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      height: 100%;
+
+      > .skillLabel {
+        display: flex;
+
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
+}

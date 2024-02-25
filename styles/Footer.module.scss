@@ -1,0 +1,88 @@
+@import 'global.module';
+
+.footer {
+  background: $colorSurfaceLight2;
+
+  border-top: 1px solid rgba($colorBorderLight2, 0.3);
+
+  padding: 16px;
+
+  > .container {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  p:not(:last-child) {
+    margin-bottom: 4px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: $colorSurfaceDark2;
+
+    border-color: rgba($colorBorderDark2, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    > .container {
+      flex-direction: column;
+
+      justify-content: center;
+
+      gap: 1rem;
+
+      p {
+        text-align: center;
+      }
+    }
+  }
+
+  @media print {
+    border-top: none;
+
+    padding: 0;
+
+    > .container > div:first-child {
+      width: 100%;
+
+      text-align: center;
+
+      p:last-child {
+        visibility: hidden;
+
+        position: relative;
+
+        pointer-events: none;
+
+        &:after {
+          content: 'You like printing don\'t you?';
+
+          visibility: visible;
+
+          display: block;
+
+          position: absolute;
+
+          top: 0;
+
+          width: 100%;
+        }
+      }
+    }
+
+    margin-top: 2rem;
+  }
+}
+
+.socialIcons {
+  display: flex;
+
+  list-style: none;
+
+  gap: 8px;
+
+  @media print {
+    display: none;
+  }
+}

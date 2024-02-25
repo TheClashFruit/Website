@@ -1,47 +1,45 @@
+import Meta from '@/components/Meta';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+
 import showdown from 'showdown';
-import showdownHighlight from 'showdown-highlight'
-import Hero from '@/components/Hero';
+import showdownHighlight from 'showdown-highlight';
+import footnotes from 'showdown-footnotes';
 
 import 'showdown-youtube';
-import footnotes from 'showdown-footnotes';
-import Footer from '@/components/Footer';
-import Link from 'next/link';
-import AdBanner from '@/components/AdBanner';
+
+import Database from '@/lib/Database';
+
+import styles from '@/styles/Home.module.scss';
 
 export default function Post({ postData }) {
   return (
     <>
-      <Navbar pageData={{ title: postData.title, active: 'post', type: 'post', postData }} />
+      <Meta pageData={{ title: postData.title, type: 'post', post: postData }} />
 
-      <Hero pageType="post" pageData={{ title: postData.title, author: postData.author }} />
+      <Navbar page="post" />
+      <Header title={postData.title} />
 
-      <article className={`prose my-4 dark:prose-invert max-w-5xl lg:mx-auto max-lg:px-4 lg:px-0`} dangerouslySetInnerHTML={{ __html: postData.content }} />
+      <main>
+        <div className={styles.container} dangerouslySetInnerHTML={{ __html: postData.content }} />
+      </main>
 
-      <div className="max-w-5xl pb-4 lg:mx-auto max-lg:px-4 lg:px-0">
-        <AdBanner
-          data-ad-slot="6363427510"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
-      </div>
-
-      <Footer />
+      <Footer shareData={{ title: postData.title, text: postData.short_readme, url: `https://theclashfruit.me/post/${postData.permalink}` }} />
     </>
-  )
+  );
 }
 
 export async function getServerSideProps(context) {
+  const db = new Database();
 
-  const postFetch = await fetch(`https://theclashfruit.me/api/v1/post/${context.params.permalink}`)
+  const postData = await db.getPost(context.params.permalink);
 
-  if(postFetch.status !== 200) {
+  if(!postData) {
     return {
       notFound: true
-    }
+    };
   }
-
-  const postData = await postFetch.json()
 
   const converter = new showdown.Converter({
     extensions: [
@@ -56,13 +54,11 @@ export async function getServerSideProps(context) {
 
   converter.setFlavor('github');
 
-  console.log(converter.getOptions().extensions)
-
   postData.content = converter.makeHtml(postData.content);
 
   return {
     props: {
       postData,
     }
-  }
+  };
 }

@@ -1,13 +1,289 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Color+Emoji&family=Noto+Sans+Mono:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@use 'sass:meta';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Noto+Color+Emoji&family=Noto+Emoji:wght@300;400;500;600;700&family=Rethink+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import 'variables.module';
 
-/*!
-  Theme: Google Dark
-  Author: Seth Wright (http://sethawright.com)
-  License: ~ MIT (or more permissive) [via base16-schemes-source]
-  Maintainer: @highlightjs/core-team
-  Version: 2021.09.0
-*/.hljs-comment{color:#969896}.hljs-tag{color:#b4b7b4}.hljs-operator,.hljs-punctuation,.hljs-subst{color:#c5c8c6}.hljs-operator{opacity:.7}.hljs-bullet,.hljs-deletion,.hljs-name,.hljs-selector-tag,.hljs-template-variable,.hljs-variable{color:#cc342b}.hljs-attr,.hljs-link,.hljs-literal,.hljs-number,.hljs-symbol,.hljs-variable.constant_{color:#f96a38}.hljs-class .hljs-title,.hljs-title,.hljs-title.class_{color:#fba922}.hljs-strong{font-weight:700;color:#fba922}.hljs-addition,.hljs-code,.hljs-string,.hljs-title.class_.inherited__{color:#198844}.hljs-attribute,.hljs-built_in,.hljs-doctag,.hljs-function .hljs-title,.hljs-keyword.hljs-atrule,.hljs-quote,.hljs-regexp,.hljs-section,.hljs-title.function_,.ruby .hljs-property{color:#3971ed}.diff .hljs-meta,.hljs-keyword,.hljs-template-tag,.hljs-type{color:#a36ac7}.hljs-emphasis{color:#a36ac7;font-style:italic}.hljs-meta,.hljs-meta .hljs-keyword,.hljs-meta .hljs-string{color:#3971ed}.hljs-meta .hljs-keyword,.hljs-meta-keyword{font-weight:700}
+* {
+  padding: 0;
+  margin: 0;
+
+  box-sizing: border-box;
+
+  scrollbar-color: $colorPrimary $colorSurfaceLight1;
+
+  @media (prefers-color-scheme: dark) {
+    scrollbar-color: $colorPrimary $colorSurfaceDark1;
+  }
+}
+
+html {
+  min-height: 100svh;
+
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(57px + 1rem);
+}
+
+body {
+  background: $colorSurfaceLight1;
+  color: $colorTextLight1;
+
+  font-family: 'Rethink Sans', 'Noto Color Emoji', 'Noto Emoji', sans-serif;
+
+  min-height: 100%;
+
+  @media (prefers-color-scheme: dark) {
+    background: $colorSurfaceDark1;
+    color: $colorTextDark1;
+  }
+}
+
+a {
+  text-decoration: none;
+
+  color: $colorPrimary;
+
+  transition: color 0.1s ease-in-out;
+
+  &:hover {
+    color: darken($colorPrimary, 5%);
+
+    text-decoration: underline;
+  }
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+main p {
+  line-height: 1.7;
+  font-size: 1rem;
+
+  margin-bottom: 1rem;
+}
+
+main {
+  > div > div {
+    > h2 {
+      margin-bottom: 1rem;
+
+      text-align: center;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  margin-bottom: 1rem;
+}
+
+pre, code {
+  tab-size: 2;
+
+  font-family: 'Fira Code', 'Noto Color Emoji', 'Noto Emoji', monospace;
+}
+
+pre {
+  overflow: hidden;
+}
+
+code {
+  background: $colorSurfaceLight2;
+
+  border-radius: 8px;
+  border: 1px solid rgba($colorBorderLight2, 0.3);
+
+  padding: 0.2rem;
+
+  @media (prefers-color-scheme: dark) {
+    background: $colorSurfaceDark2;
+
+    border-color: rgba($colorBorderDark2, 0.3);
+  }
+}
+
+pre > code {
+  background: $colorSurfaceLight2;
+
+  border-radius: 16px;
+  border: 1px solid rgba($colorBorderLight2, 0.3);
+
+  display: block;
+
+  overflow-x: auto;
+
+  padding: 1rem;
+
+  scrollbar-width: none;
+
+  @media (prefers-color-scheme: dark) {
+    background: $colorSurfaceDark2;
+
+    border-color: rgba($colorBorderDark2, 0.3);
+  }
+}
+
+@media print {
+  p, h1,h2,h3,h4,h5,h6, body {
+    color: black !important;
+  }
+
+  * {
+    background: white !important;
+  }
+
+  a {
+    text-decoration: underline !important;
+
+    color: blue !important;
+  }
+
+  pre > code, code, pre {
+    border: none;
+    border-radius: 0;
+
+    padding: 0;
+  }
+
+  .google-revocation-link-placeholder {
+    display: none;
+  }
+}
+
+// ----
+
+.swagger-ui {
+  font-family: 'Rethink Sans', 'Noto Color Emoji', 'Noto Emoji', sans-serif !important;
+
+  pre, code {
+    tab-size: 2;
+
+    font-family: 'Fira Code', 'Noto Color Emoji', 'Noto Emoji', monospace !important;
+  }
+}
+
+// -----
+
+#__next {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+
+  > main {
+    flex: 1;
+  }
+}
+
+// -----
+
+@media (prefers-color-scheme: light) {
+  .hljs {
+    color: #24292e;
+  }
+  .hljs-doctag, .hljs-keyword, .hljs-meta .hljs-keyword, .hljs-template-tag, .hljs-template-variable, .hljs-type, .hljs-variable.language_ {
+    color: #d73a49
+  }
+  .hljs-title, .hljs-title.class_, .hljs-title.class_.inherited__, .hljs-title.function_ {
+    color: #6f42c1
+  }
+  .hljs-attr, .hljs-attribute, .hljs-literal, .hljs-meta, .hljs-number, .hljs-operator, .hljs-selector-attr, .hljs-selector-class, .hljs-selector-id, .hljs-variable {
+    color: #005cc5
+  }
+  .hljs-meta .hljs-string, .hljs-regexp, .hljs-string {
+    color: #032f62
+  }
+  .hljs-built_in, .hljs-symbol {
+    color: #e36209
+  }
+  .hljs-code, .hljs-comment, .hljs-formula {
+    color: #6a737d
+  }
+  .hljs-name, .hljs-quote, .hljs-selector-pseudo, .hljs-selector-tag {
+    color: #22863a
+  }
+  .hljs-subst {
+    color: #24292e
+  }
+  .hljs-section {
+    color: #005cc5;
+    font-weight: 700
+  }
+  .hljs-bullet {
+    color: #735c0f
+  }
+  .hljs-emphasis {
+    color: #24292e;
+    font-style: italic
+  }
+  .hljs-strong {
+    color: #24292e;
+    font-weight: 700
+  }
+  .hljs-addition {
+    color: #22863a;
+    background-color: #f0fff4
+  }
+  .hljs-deletion {
+    color: #b31d28;
+    background-color: #ffeef0
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .hljs {
+    color: #c9d1d9;
+  }
+  .hljs-doctag, .hljs-keyword, .hljs-meta .hljs-keyword, .hljs-template-tag, .hljs-template-variable, .hljs-type, .hljs-variable.language_ {
+    color: #ff7b72
+  }
+  .hljs-title, .hljs-title.class_, .hljs-title.class_.inherited__, .hljs-title.function_ {
+    color: #d2a8ff
+  }
+  .hljs-attr, .hljs-attribute, .hljs-literal, .hljs-meta, .hljs-number, .hljs-operator, .hljs-selector-attr, .hljs-selector-class, .hljs-selector-id, .hljs-variable {
+    color: #79c0ff
+  }
+  .hljs-meta .hljs-string, .hljs-regexp, .hljs-string {
+    color: #a5d6ff
+  }
+  .hljs-built_in, .hljs-symbol {
+    color: #ffa657
+  }
+  .hljs-code, .hljs-comment, .hljs-formula {
+    color: #8b949e
+  }
+  .hljs-name, .hljs-quote, .hljs-selector-pseudo, .hljs-selector-tag {
+    color: #7ee787
+  }
+  .hljs-subst {
+    color: #c9d1d9
+  }
+  .hljs-section {
+    color: #1f6feb;
+    font-weight: 700
+  }
+  .hljs-bullet {
+    color: #f2cc60
+  }
+  .hljs-emphasis {
+    color: #c9d1d9;
+    font-style: italic
+  }
+  .hljs-strong {
+    color: #c9d1d9;
+    font-weight: 700
+  }
+  .hljs-addition {
+    color: #aff5b4;
+    background-color: #033a16
+  }
+  .hljs-deletion {
+    color: #ffdcd7;
+    background-color: #67060c
+  }
+}

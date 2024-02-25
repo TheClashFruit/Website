@@ -1,64 +1,88 @@
+import Meta from '@/components/Meta';
 import Navbar from '@/components/Navbar';
-import BlogItem from '@/components/BlogItem';
-
-import showdown from 'showdown';
-import Hero from '@/components/Hero';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import Database from '@/lib/Database';
+import Paginator from '@/components/Paginator';
+import Card from '@/components/Card';
+import Button from '@/components/Button';
 import AdBanner from '@/components/AdBanner';
 
-export default function Blog({ blogData }) {
+import {
+  Share2
+} from 'lucide-react';
 
+import styles from '@/styles/Blog.module.scss';
+
+import Link from 'next/link';
+
+export default function Blog({ posts, page, totalPages }) {
   return (
     <>
-      <Navbar pageData={{ title: 'Blog', active: 'blog', type: 'page' }} />
+      <Meta pageData={{ title: 'Blog', type: 'page' }} />
 
-      <Hero pageType="page" pageData={{ title: 'Blog' }} />
+      <Navbar page="blog" />
+      <Header title="Blog" />
 
-      <main className={`grid grid-cols-3 my-4 max-md:grid-cols-1 max-lg:grid-cols-2 auto-rows-max grid-flow-row gap-4 max-w-5xl lg:mx-auto max-lg:mx-4 lg:px-0`}>
-        {blogData.map((blog, i) => (
-          blog.ad ? (
+      <main>
+        <div className={styles.container}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '90px' }}>
             <AdBanner
-              data-ad-slot="5301256152"
-              data-ad-layout-key="-62+di+47-55+1l"
-              data-ad-format="fluid"
+              style={{ display: 'inline-block' }}
+              data-ad-client="ca-pub-1510964912637528"
+              data-ad-slot="3830865920"
             />
-          ) : (
-            <BlogItem
-              blogData={blog}
-              key={i}
-            />
-          )
-        ))}
+          </div>
+
+          <div className={styles.postsGrid}>
+            {
+              posts.map((post, index) => {
+                return (
+                  <Link key={index} href={`/post/${post.permalink}`} className={styles.blogCardWrapperLink}>
+                    <Card className={styles.blogCard} style={{ '--image': 'url("https://cdn-new.theclashfruit.me/gallery/IMG_1707.jpg")' }}>
+                      <div className={styles.header}>
+                        <Button onClick={() => { navigator.share({ title: post.title, text: post.content.split(' ', 35).join(' '), url: `https://theclashfruit.me/post/${post.permalink}` }); }} icon={Share2} type="icon" />
+                      </div>
+                      <div className={styles.content}>
+                        <div className={styles.title}>
+                          <h3>{post.title}</h3>
+                          <label>{post.author.display_name}</label>
+                        </div>
+
+                        <p>{post.content.split(' ', 35).join(' ')}...</p>
+                      </div>
+                    </Card>
+                  </Link>
+                );
+              })
+            }
+          </div>
+
+          <Paginator page={Number.parseInt(page)} totalPages={Number.parseInt(totalPages)} />
+        </div>
       </main>
 
-      <Footer />
+      <Footer shareData={{ title: 'Blog', text: 'Check out TheClashFruit\'s blog!', url: 'https://theclashfruit.me/blog' }} />
     </>
-  )
+  );
 }
 
-export async function getServerSideProps() {
-  const blogFetch = await fetch('https://theclashfruit.me/api/v1/posts')
-  const blogData = await blogFetch.json()
+export async function getServerSideProps({ query }) {
+  const db = new Database();
 
-  const converter = new showdown.Converter();
+  const page = {
+    offset: query.page !== undefined ? Math.floor((query.page - 1) * 10) : 0,
+    limit: query.page !== undefined ? Math.floor((query.page - 1) * 10) + 10 : 10,
+  };
 
-  converter.setFlavor('github');
-
-  const finalBlogData = blogData.data.map((blog) => {
-    blog.content = converter.makeHtml(blog.content);
-    blog.ad = false;
-
-    return blog;
-  });
-
-  const reverse = finalBlogData.reverse();
-
-  reverse.splice(1, 0, { ad: true });
-  reverse.splice(7, 0, { ad: true });
+  const posts = await db.getPosts(page.offset, page.limit, query.q);
+  const totalPosts = await db.getPostCount(query.q);
 
   return {
     props: {
-      blogData: reverse,
-    }
-  }
+      posts,
+      page: query.page !== undefined ? query.page : 1,
+      totalPages: Math.ceil(totalPosts / 10)
+    },
+  };
 }

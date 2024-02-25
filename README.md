@@ -1,4 +1,4 @@
-![Website Banner](https://cdn.theclashfruit.me/git/Website/web_banner.svg)
+<img alt="Website Banner" src="https://cdn-new.theclashfruit.me/forgejo/website/banner.svg" width="100%">
 
 <h1 align="center">Website</h1>
 
@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  My website written with Next.JS and Tailwind.
+  My website written with Next.js.
 </p>
 
 ## New Version!
@@ -21,10 +21,17 @@ I'm doing a redesign over on the [`dev/redesign`](https://git.theclashfruit.me/T
 
 ## Developing
 
-1. Set `DATABASE_CONN` to your MongoDB connection string in `.env.local`.
-2. Install dependencies with `npm install`.
-3. Run the development server with `npm run dev`.
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+1. Install dependencies with `pnpm install`.
+2. Copy `.env` to `.env.local` and fill in the values.
+3. Set up the database from `tools/setup.sql` if needed.
+4. Run the development server with `pnpm run dev`.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Deploying
+
+1. Install dependencies with `pnpm install`.
+2. Run `node tools/setup.mjs` to set up env variables and the database and build the code.
+3. Run `pnpm start` to start the production server.
 
 ## Contributing
 
@@ -33,7 +40,7 @@ Feel free to contribute, just make sure you are following design patterns I used
 ## License
 
 ```
-Copyright 2023 TheClashFruit
+Copyright 2023 - 2024 TheClashFruit
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

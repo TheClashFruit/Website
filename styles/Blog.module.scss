@@ -1,0 +1,100 @@
+@import 'global.module';
+
+.container {
+  margin-top: 1rem;
+}
+
+.postsGrid {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(320px, 1fr));
+
+  gap: 1rem;
+
+  margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+}
+
+.blogCardWrapperLink {
+  text-decoration: none;
+
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+
+    color: inherit;
+  }
+}
+
+.blogCard {
+  padding: 0;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  transition: 200ms scale;
+
+  > .header {
+    height: 216px;
+
+    background: linear-gradient(180deg, rgba($colorSurfaceLight2, 0.16) 0%, rgba($colorSurfaceLight2, 0.75) 50%, $colorSurfaceLight2 100%), var(--image) 100% / cover no-repeat;
+
+    padding: 1rem;
+
+    display: flex;
+
+    flex-direction: column;
+    align-items: end;
+  }
+
+  > .content {
+    padding: 1rem;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.5rem;
+
+    > .title {
+      > h1 {
+        font-size: 16px;
+      }
+
+      > label {
+        color: rgba($colorTextLight1, 0.75);
+
+        font-size: 14px;
+      }
+    }
+
+    > p {
+      line-height: normal;
+
+      margin: 0;
+    }
+  }
+
+  &:hover {
+    scale: 1.01;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    > .header {
+      background: linear-gradient(180deg, rgba($colorSurfaceDark2, 0.16) 0%, rgba($colorSurfaceDark2, 0.75) 50%, $colorSurfaceDark2 100%), var(--image) 100% / cover no-repeat;
+    }
+
+    > .content {
+      > .title {
+        > label {
+          color: rgba($colorTextDark1, 0.75);
+        }
+      }
+    }
+  }
+}
