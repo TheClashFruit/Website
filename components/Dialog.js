@@ -13,7 +13,7 @@ export default function Dialog({ className, title, closeAction, children, ...pro
 
           <Button icon={X} type="icon" onClick={closeAction} />
         </div>
-        <div>
+        <div className={styles.dialogContent}>
           {children}
         </div>
       </div>

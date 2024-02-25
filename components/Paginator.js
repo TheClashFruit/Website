@@ -8,13 +8,13 @@ import {
 export default function Paginator({ page, totalPages }) {
   const totalPagesArray = Array.from({ length: totalPages }, (_, i) => {
     return (
-      <Button key={i} href={`/blog?page=${i + 1}`} type={page === i + 1 ? 'primary' : 'text'} title={`Page ${i + 1}`}>{i + 1}</Button>
+      <Button key={i} href={`?page=${i + 1}`} type={page === i + 1 ? 'primary' : 'text'} title={`Page ${i + 1}`}>{i + 1}</Button>
     );
   });
 
   const partialPagesArray = Array.from({ length: 8 }, (_, i) => {
     return (
-      <Button key={i} href={`/blog?page=${i + 1}`} type={page === i + 1 ? 'primary' : 'text'} title={`Page ${i + 1}`}>{i + 1}</Button>
+      <Button key={i} href={`?page=${i + 1}`} type={page === i + 1 ? 'primary' : 'text'} title={`Page ${i + 1}`}>{i + 1}</Button>
     );
   });
 

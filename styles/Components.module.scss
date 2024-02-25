@@ -175,8 +175,20 @@
 
   z-index: 15;
 
+  overflow: hidden;
+
   > .card {
     width: 700px;
+
+    max-height: calc(100vh - 2rem);
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 0;
+
+    overflow: hidden;
 
     > .dialogHeader {
       display: flex;
@@ -184,13 +196,19 @@
       justify-content: space-between;
       align-items: center;
 
-      margin-bottom: 1rem;
+      padding: 1rem;
 
       > label {
         font-size: 1.3rem;
 
         font-weight: 700;
       }
+    }
+
+    > .dialogContent {
+      overflow: auto;
+
+      padding: 0 1rem 1rem;
     }
 
     @media (max-width: 768px) {

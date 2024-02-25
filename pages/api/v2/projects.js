@@ -5,10 +5,11 @@ export default async function handler(req, res) {
 
   const query = req.query;
 
-  const projects = await db.getProjects(query.offset, query.limit);
+  const projects = await db.getProjects(query.offset, query.limit, query.q);
+  const totalProjects = await db.getProjectCount(query.q);
 
   res.status(200).json({
-    data: projects,
+    hits: projects,
     offset: parseInt(query.offset) || 0,
     limit: parseInt(query.limit) || 10,
     total: projects.length
