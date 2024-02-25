@@ -7,11 +7,15 @@
 .postsGrid {
   display: grid;
 
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, minmax(320px, 1fr));
 
   gap: 1rem;
 
   margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
 }
 
 .blogCard {
@@ -26,7 +30,7 @@
   > .header {
     height: 216px;
 
-    background: linear-gradient(180deg, rgba($colorSurfaceLight2, 0.16) 0%, rgba($colorSurfaceLight2, 0.75) 50%, $colorSurfaceLight2 100%), url('https://cdn-new.theclashfruit.me/gallery/IMG_1707.jpg') 100% / cover no-repeat;
+    background: linear-gradient(180deg, rgba($colorSurfaceLight2, 0.16) 0%, rgba($colorSurfaceLight2, 0.75) 50%, $colorSurfaceLight2 100%), var(--image) 100% / cover no-repeat;
 
     padding: 1rem;
 

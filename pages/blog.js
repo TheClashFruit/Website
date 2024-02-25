@@ -36,7 +36,7 @@ export default function Blog({ posts, page, totalPages }) {
             {
               posts.map((post, index) => {
                 return (
-                  <Card key={index} className={styles.blogCard}>
+                  <Card key={index} className={styles.blogCard} style={{ '--image': 'url("https://cdn-new.theclashfruit.me/gallery/IMG_1707.jpg")' }}>
                     <div className={styles.header}>
                       <Button onClick={() => { navigator.share({ title: post.title, text: post.content.split(' ', 35).join(' '), url: `https://theclashfruit.me/post/${post.permalink}` }); }} icon={Share2} type="icon" />
                     </div>

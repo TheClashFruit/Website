@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "app",
+      "package_name": "me.theclashfruit",
+      "sha256_cert_fingerprints": [
+        "52:0F:78:C2:B8:0D:7B:52:85:AE:D5:3B:C4:08:DB:C9:88:D2:80:D5:77:91:66:FD:47:12:18:1A:13:6F:77:D5"
+      ]
+    }
+  }
+]
