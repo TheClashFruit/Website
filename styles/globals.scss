@@ -169,6 +169,19 @@ pre > code {
 
 // -----
 
+#__next {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+
+  > main {
+    flex: 1;
+  }
+}
+
+// -----
+
 @media (prefers-color-scheme: light) {
   .hljs {
     color: #24292e;

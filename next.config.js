@@ -40,6 +40,14 @@ const nextConfig = {
     });
 
     return config;
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/.well-known/webfinger',
+        destination: '/api/webfinger'
+      }
+    ];
   }
 };
 
