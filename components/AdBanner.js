@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 export default function AdBanner(props) {
+  /*
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -8,6 +9,7 @@ export default function AdBanner(props) {
       console.log(err);
     }
   }, []);
+  */
 
   return (
     <ins

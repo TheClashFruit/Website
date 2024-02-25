@@ -16,7 +16,7 @@ import styles from '@/styles/Home.module.scss';
 export default function Post({ postData }) {
   return (
     <>
-      <Meta pageData={{ title: postData.title, type: 'post' }} />
+      <Meta pageData={{ title: postData.title, type: 'post', post: postData }} />
 
       <Navbar page="post" />
       <Header title={postData.title} />

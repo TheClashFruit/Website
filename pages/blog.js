@@ -14,6 +14,8 @@ import {
 
 import styles from '@/styles/Blog.module.scss';
 
+import Link from 'next/link';
+
 export default function Blog({ posts, page, totalPages }) {
   return (
     <>
@@ -36,19 +38,21 @@ export default function Blog({ posts, page, totalPages }) {
             {
               posts.map((post, index) => {
                 return (
-                  <Card key={index} className={styles.blogCard} style={{ '--image': 'url("https://cdn-new.theclashfruit.me/gallery/IMG_1707.jpg")' }}>
-                    <div className={styles.header}>
-                      <Button onClick={() => { navigator.share({ title: post.title, text: post.content.split(' ', 35).join(' '), url: `https://theclashfruit.me/post/${post.permalink}` }); }} icon={Share2} type="icon" />
-                    </div>
-                    <div className={styles.content}>
-                      <div className={styles.title}>
-                        <h3>{post.title}</h3>
-                        <label>{post.author.display_name}</label>
+                  <Link key={index} href={`/post/${post.permalink}`} className={styles.blogCardWrapperLink}>
+                    <Card className={styles.blogCard} style={{ '--image': 'url("https://cdn-new.theclashfruit.me/gallery/IMG_1707.jpg")' }}>
+                      <div className={styles.header}>
+                        <Button onClick={() => { navigator.share({ title: post.title, text: post.content.split(' ', 35).join(' '), url: `https://theclashfruit.me/post/${post.permalink}` }); }} icon={Share2} type="icon" />
                       </div>
+                      <div className={styles.content}>
+                        <div className={styles.title}>
+                          <h3>{post.title}</h3>
+                          <label>{post.author.display_name}</label>
+                        </div>
 
-                      <p>{post.content.split(' ', 35).join(' ')}...</p>
-                    </div>
-                  </Card>
+                        <p>{post.content.split(' ', 35).join(' ')}...</p>
+                      </div>
+                    </Card>
+                  </Link>
                 );
               })
             }
@@ -68,11 +72,11 @@ export async function getServerSideProps({ query }) {
 
   const page = {
     offset: query.page !== undefined ? Math.floor((query.page - 1) * 10) : 0,
-    limit: query.page !== undefined ? Math.floor((query.page - 1) * 10) + 10 : 10
+    limit: query.page !== undefined ? Math.floor((query.page - 1) * 10) + 10 : 10,
   };
 
-  const posts = await db.getPosts(page.offset, page.limit);
-  const totalPosts = await db.getPostCount();
+  const posts = await db.getPosts(page.offset, page.limit, query.q);
+  const totalPosts = await db.getPostCount(query.q);
 
   return {
     props: {

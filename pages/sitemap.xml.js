@@ -1,3 +1,5 @@
+import Database from '@/lib/Database';
+
 export default function SiteMap() {
   // it's the server's job!
 }
@@ -18,19 +20,40 @@ export async function getServerSideProps({ res }) {
     {
       loc: 'https://theclashfruit.me/projects',
       lastmod: isoString,
-      priority: 0.80
+      priority: 1
     },
     {
       loc: 'https://theclashfruit.me/gallery',
       lastmod: isoString,
-      priority: 0.80
+      priority: 1
     },
     {
       loc: 'https://theclashfruit.me/blog',
       lastmod: isoString,
-      priority: 0.80
+      priority: 1
     }
   ];
+
+  const db = new Database();
+
+  const projects = await db.getProjects(0, 1000);
+  const posts = await db.getPosts(0, 1000);
+
+  projects.forEach(project => {
+    pages.push({
+      loc: `https://theclashfruit.me/projects/${project.id}`,
+      lastmod: isoString,
+      priority: 0.9
+    });
+  });
+
+  posts.forEach(post => {
+    pages.push({
+      loc: `https://theclashfruit.me/post/${post.permalink}`,
+      lastmod: isoString,
+      priority: 0.9
+    });
+  });
 
   let tmp = '';
 

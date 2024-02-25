@@ -18,6 +18,18 @@
   }
 }
 
+.blogCardWrapperLink {
+  text-decoration: none;
+
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+
+    color: inherit;
+  }
+}
+
 .blogCard {
   padding: 0;
 
@@ -74,7 +86,7 @@
 
   @media (prefers-color-scheme: dark) {
     > .header {
-      background: linear-gradient(180deg, rgba($colorSurfaceDark2, 0.16) 0%, rgba($colorSurfaceDark2, 0.75) 50%, $colorSurfaceDark2 100%), url('https://cdn-new.theclashfruit.me/gallery/IMG_1707.jpg') 100% / cover no-repeat;
+      background: linear-gradient(180deg, rgba($colorSurfaceDark2, 0.16) 0%, rgba($colorSurfaceDark2, 0.75) 50%, $colorSurfaceDark2 100%), var(--image) 100% / cover no-repeat;
     }
 
     > .content {
