@@ -42,6 +42,32 @@ export default function Navbar({ page }) {
     });
   }, []);
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = new FormData(e.target);
+
+    const f = await fetch('/api/v2/contact', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: data.get('name'),
+        email: data.get('email'),
+        message: data.get('msg')
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const r = await f.json();
+
+    if(r.error) {
+      alert(r.message);
+    }
+
+    setDialogOpen(false);
+  };
+
   const toggleNav = (e) => {
     navRef.current.classList.toggle(styles.open);
 
@@ -93,10 +119,10 @@ export default function Navbar({ page }) {
 
       { dialogOpen &&
         <Dialog title="Contact" closeAction={() => { setDialogOpen(false); }}>
-          <form>
+          <form onSubmit={onSubmit}>
             <Input required name="name"  type="text"     label="Name" />
             <Input required name="email" type="email"    label="E-Mail" />
-            <Input required name="msg"   type="textarea" label="Message" />
+            <Input required name="msg"   type="textarea" label="Message (Markdown Supported!)" />
 
             <Button icon={Forward} type="primary">Send</Button>
           </form>
