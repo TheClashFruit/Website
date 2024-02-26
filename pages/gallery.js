@@ -63,8 +63,8 @@ export default function Gallery({ gallery, page, totalPages }) {
             {
               gallery.map((image, i) => {
                 return (
-                  <Card key={i} className={styles.galleryCard} onClick={() => { setDialogData({ title: image.title, data: image }); setDialogOpen(true); }}>
-                    <Image src={image.preview} alt={image.title} width={356} height={538} />
+                  <Card key={i} tabindex={(i + 1)} className={styles.galleryCard} onClick={() => { setDialogData({ title: image.title, data: image }); setDialogOpen(true); }}>
+                    <Image src={image.preview} alt={image.title} width={(356 * 3)} height={(538 * 3)} />
 
                     <div className={styles.overlay}>
                       <h3>{image.title}</h3>
