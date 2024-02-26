@@ -126,6 +126,8 @@ export default function Navbar({ page }) {
 
             <Button icon={Forward} type="primary">Send</Button>
           </form>
+
+          <p style={{ textAlign: 'center', marginTop: '1rem' }}>Or send an email to <Link href="mailto:admin@theclashfruit.me">admin@theclashfruit.me</Link></p>
         </Dialog>
       }
     </>

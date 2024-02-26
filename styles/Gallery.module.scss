@@ -76,12 +76,53 @@
 }
 
 .downloads {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.5rem;
+
   > div {
     display: flex;
 
     justify-content: space-between;
     align-items: center;
 
-    padding: 8px 0;
+    gap: 2rem;
+  }
+}
+
+.galleryDialog {
+  width: fit-content !important;
+
+  .galleryDialogContent {
+    display: flex;
+
+    gap: 1rem;
+
+    > img {
+      border-radius: 12px;
+      border: 1px solid rgba($colorBorderLight2, 0.3);
+
+      height: 50%;
+
+      object-fit: cover;
+
+      @media (prefers-color-scheme: dark) {
+        border: 1px solid rgba($colorBorderDark2, 0.3);
+      }
+    }
+
+    > div {
+      flex: 1;
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+
+      > img {
+        width: 100%;
+      }
+    }
   }
 }

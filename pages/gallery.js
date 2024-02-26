@@ -64,7 +64,7 @@ export default function Gallery({ gallery, page, totalPages }) {
               gallery.map((image, i) => {
                 return (
                   <Card key={i} tabindex={(i + 1)} className={styles.galleryCard} onClick={() => { setDialogData({ title: image.title, data: image }); setDialogOpen(true); }}>
-                    <Image src={image.preview} alt={image.title} width={(356 * 3)} height={(538 * 3)} />
+                    <Image src={image.preview} alt={image.title} width={(356 * 3)} height={(538 * 3)} priority={true} />
 
                     <div className={styles.overlay}>
                       <h3>{image.title}</h3>
@@ -86,25 +86,43 @@ export default function Gallery({ gallery, page, totalPages }) {
       }}/>
 
       { dialogOpen &&
-        <Dialog title={dialogData.title} closeAction={() => {
-          setDialogOpen(false);
-        }}>
-          <h3>License</h3>
-          <Link href={dialogData.data.license.url}>{dialogData.data.license.short_name}</Link>
+        <Dialog title={dialogData.title} className={styles.galleryDialog} closeAction={() => { setDialogOpen(false); }}>
+          <div className={styles.galleryDialogContent}>
+            <Image src={dialogData.data.preview} alt={dialogData.title} width={(500)} height={(1000)} unoptimized={true} />
 
-          <h3>Downloads</h3>
-          <div className={styles.downloads}>
-            {
-              dialogData.data.pictures.map((p, i) => {
-                return (
-                  <div key={i}>
-                    <p>{p.name}</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <h3>License</h3>
 
-                    <Button icon={Download} type="primary" onClick={() => { download(p.url, p.name); }}>Download</Button>
-                  </div>
-                );
-              })
-            }
+                <Link href={dialogData.data.license.url} target="_blank">{dialogData.data.license.short_name}</Link>
+              </div>
+
+              <div>
+                <h3>Downloads</h3>
+
+                <div className={styles.downloads}>
+                  {
+                    dialogData.data.pictures.map((p, i) => {
+                      return (
+                        <div key={i}>
+                          <p>{p.name}</p>
+
+                          <Button icon={Download} type="primary" onClick={() => {
+                            download(p.url, p.name);
+                          }}>Download</Button>
+                        </div>
+                      );
+                    })
+                  }
+                </div>
+              </div>
+
+              <div>
+                <h3 style={{ marginBottom: '0.5rem' }}>Printed Versions</h3>
+
+                <p>Coming Soon... or never...</p>
+              </div>
+            </div>
           </div>
         </Dialog>
       }

@@ -20,8 +20,8 @@ export default function Dialog({ className, title, closeAction, children, ...pro
   };
 
   return (
-    <div className={styles.dialog}>
-      <div className={className ? `${styles.card} ${className}` : styles.card} tabindex="-1" {...props}>
+    <div className={styles.dialog} onClick={() => { closeAction(); removeListener(); }}>
+      <div className={className ? `${styles.card} ${className}` : styles.card} tabindex="-1" onClick={(e) => { e.stopPropagation(); }} {...props}>
         <div className={styles.dialogHeader}>
           <label>{title}</label>
 
