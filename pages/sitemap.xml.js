@@ -1,15 +1,15 @@
 import Database from '@/lib/Database';
 
+import getConfig from 'next/config';
+
 export default function SiteMap() {
   // it's the server's job!
 }
 
 export async function getServerSideProps({ res }) {
-  const f = fetch('https://git.theclashfruit.me/api/v1/repos/TheClashFruit/Website/commits?sha=dev/redesign&limit=1');
-  const r = await f;
-  const d = await r.json();
+  const { publicRuntimeConfig } = getConfig();
 
-  const isoString = new Date(d[0].created).toISOString();
+  const isoString = new Date(publicRuntimeConfig.modifiedDate).toISOString();
 
   const pages = [
     {
@@ -42,7 +42,7 @@ export async function getServerSideProps({ res }) {
   projects.forEach(project => {
     pages.push({
       loc: `https://theclashfruit.me/projects/${project.id}`,
-      lastmod: isoString,
+      lastmod: new Date(project.updated).toISOString(),
       priority: 0.9
     });
   });
@@ -50,7 +50,7 @@ export async function getServerSideProps({ res }) {
   posts.forEach(post => {
     pages.push({
       loc: `https://theclashfruit.me/post/${post.permalink}`,
-      lastmod: isoString,
+      lastmod: new Date(post.updated).toISOString(),
       priority: 0.9
     });
   });
