@@ -7,6 +7,46 @@ export default function Meta({ pageData }) {
 
   const robots = pageData.allowIndex === undefined || pageData.allowIndex ? 'index follow' : 'noindex nofollow';
 
+  let structuredData = {};
+
+  if (pageData.type === 'page') {
+    structuredData.page = {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      url: 'https://theclashfruit.me/',
+      potentialAction: [
+        {
+          '@type': 'SearchAction',
+          'query-input': 'required name=q',
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: 'https://theclashfruit.me/search?q={q}&type=all'
+          }
+        }
+      ]
+    };
+  }
+
+  if (pageData.type === 'post') {
+    structuredData.post = {
+      '@context': 'https://schema.org',
+      '@type': 'NewsArticle',
+      headline: pageData.title,
+      image: [
+        pageData.post.image_url
+      ],
+      datePublished: new Date(pageData.post.created).toISOString(),
+      dateModified: new Date(pageData.post.updated).toISOString(),
+      author: [
+        {
+          '@type': 'Person',
+          name: pageData.post.author.display_name,
+          url: 'https://theclashfruit.me/user/' + pageData.post.author.username
+        }
+      ]
+    };
+  }
+
   return (
     <Head>
       <title>TheClashFruit &bull; {pageData.title}</title>
@@ -31,6 +71,10 @@ export default function Meta({ pageData }) {
           <meta property="og:url" content="https://theclashfruit.me"/>
           <meta property="og:image" content="https://www.theclashfruit.me/img/logo.png"/>
           <meta property="og:description" content="A full-stack web, mobile developer & mod creator."/>
+
+          <script type="application/ld+json">
+            {JSON.stringify(structuredData.page, null, 2)}
+          </script>
         </>
       )}
 
@@ -61,6 +105,10 @@ export default function Meta({ pageData }) {
               );
             })
           }
+
+          <script type="application/ld+json">
+            {JSON.stringify(structuredData.post, null, 2)}
+          </script>
         </>
       )}
 
@@ -84,26 +132,6 @@ export default function Meta({ pageData }) {
           <meta property="og:video:height" content="720"/>
         </>
       )}
-
-      <script type="application/ld+json">
-        {`
-          {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "url": "https://theclashfruit.me/",
-            "potentialAction": [
-              {
-                "@type": "SearchAction",
-                "query-input": "required name=q"
-                "target": {
-                  "@type": "EntryPoint",
-                  "urlTemplate": "https://theclashfruit.me/search?q={q}&type=all"
-                }
-              }
-            ]
-          }
-        `}
-      </script>
 
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1510964912637528" crossOrigin="anonymous"/>
     </Head>
