@@ -41,7 +41,7 @@ export async function getServerSideProps({ res }) {
 
   projects.forEach(project => {
     pages.push({
-      loc: `https://theclashfruit.me/projects/${project.id}`,
+      loc: `https://theclashfruit.me/project/${project.permalink}`,
       lastmod: new Date(project.updated).toISOString(),
       priority: 0.9
     });
