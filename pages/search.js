@@ -17,7 +17,7 @@ import styles from '@/styles/Blog.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function Blog({ q, everything, page, totalPages }) {
+export default function Search({ q, everything, page, totalPages }) {
   return (
     <>
       <Meta pageData={{ title: `Search: ${q}`, type: 'page' }} />

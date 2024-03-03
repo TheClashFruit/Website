@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 export default function Meta({ pageData }) {
   const router = useRouter();
 
+  const robots = pageData.allowIndex === undefined || pageData.allowIndex ? 'index follow' : 'noindex nofollow';
+
   return (
     <Head>
       <title>TheClashFruit &bull; {pageData.title}</title>
@@ -13,7 +15,7 @@ export default function Meta({ pageData }) {
       <link rel="icon" href="/favicon_dark.ico" type="image/x-icon" media="(prefers-color-scheme: dark)"/>
 
       <meta property="tcf:page_data" content={JSON.stringify(pageData)}/>
-      <meta name="robots" content="index, follow"/>
+      <meta name="robots" content={robots}/>
 
       {pageData.type === 'page' && (
         <>
@@ -62,6 +64,27 @@ export default function Meta({ pageData }) {
         </>
       )}
 
+      {pageData.type === 'video' && (
+        <>
+          <meta name="name" content={`TheClashFruit &bull; ${pageData.title}`}/>
+          <meta name="description" content="dj contruction worker"/>
+          <meta name="keywords" content={`theclashfruit, tcf, blokkok, the, clash, fruit, ${pageData.title.trim().split(' ').join(', ').toLowerCase()}`}/>
+          <meta name="theme-color" content="#00796B"/>
+
+          <meta property="og:site_name" content="TheClashFruit"/>
+          <meta property="og:title" content={pageData.title}/>
+          <meta property="og:type" content="video.other"/>
+          <meta property="og:locale" content="en_GB"/>
+          <meta property="og:url" content="https://theclashfruit.me"/>
+
+          <meta property="og:video" content={pageData.url}/>
+          <meta property="og:video:secure_url" content={pageData.url}/>
+          <meta property="og:video:type" content="video/mp4"/>
+          <meta property="og:video:width" content="1280"/>
+          <meta property="og:video:height" content="720"/>
+        </>
+      )}
+
       <script type="application/ld+json">
         {`
           {
@@ -82,7 +105,8 @@ export default function Meta({ pageData }) {
         `}
       </script>
 
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1510964912637528" crossOrigin="anonymous"/>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1510964912637528"
+              crossOrigin="anonymous"/>
     </Head>
   );
 }
