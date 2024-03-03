@@ -27,7 +27,7 @@ export default async function handler(req, res) {
         activeHalfyear: 1,
         activeMonth: 1
       },
-      localPosts: db.getPostCount(),
+      localPosts: await db.getPostCount(),
       localComments: 0
     },
     metadata: {}
