@@ -257,6 +257,40 @@
   }
 }
 
+.inputDropdown {
+  padding: .5rem 1rem;
+
+  margin-bottom: .5rem;
+
+  border-radius: 8px;
+  border: 1px solid rgba($colorBorderLight3, 0.3);
+
+  cursor: pointer;
+
+  background: $colorSurfaceLight3;
+
+  font-family: 'Rethink Sans', 'Noto Color Emoji', 'Noto Emoji', sans-serif;
+  font-size: 1rem;
+
+  color: $colorTextLight1;
+
+  transition: border 0.1s ease-in-out;
+
+  &:focus {
+    border-color: $colorPrimary;
+
+    outline: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: $colorSurfaceDark3;
+
+    border-color: rgba($colorBorderDark3, 0.3);
+
+    color: $colorTextDark1;
+  }
+}
+
 textarea.inputText {
   resize: vertical;
 

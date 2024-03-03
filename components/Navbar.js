@@ -12,6 +12,7 @@ import {
   Forward,
   Mails,
   Menu,
+  Search,
   X
 } from 'lucide-react';
 
@@ -21,12 +22,17 @@ import {
   useState
 } from 'react';
 
+import {useRouter} from 'next/router';
+
 export default function Navbar({ page }) {
+  const router = useRouter();
+
   const navRef         = useRef();
   const navCollapseRef = useRef();
 
   const [ open, setOpen ] = useState(false);
   const [ dialogOpen, setDialogOpen ] = useState(false);
+  const [ searchOpen, setSearchOpen ] = useState(false);
 
   useEffect(() => {
     if(window.scrollY <= 30 && navRef.current !== null)
@@ -89,7 +95,13 @@ export default function Navbar({ page }) {
           <div className={styles.navLogoContainer}>
             <Logo className={styles.navLogo} width={32} height={32} viewBox="0 0 24 24" />
 
-            <Button className={styles.navToggle} icon={open ? X : Menu} type="icon" onClick={toggleNav} />
+            <div>
+              <Button icon={Search} type="icon" onClick={() => {
+                setSearchOpen(true);
+              }} />
+
+              <Button className={styles.navToggle} icon={open ? X : Menu} type="icon" onClick={toggleNav} />
+            </div>
           </div>
 
           <div className={styles.navCollapse} ref={navCollapseRef}>
@@ -108,17 +120,26 @@ export default function Navbar({ page }) {
               </li>
             </ul>
 
-            <ul>
+            <ul className={styles.navButtons}>
               <li>
-                <Button icon={Mails} type="primary" onClick={() => { setDialogOpen(true); }}>Contact</Button>
+                <Button icon={Search} type="icon" onClick={() => {
+                  setSearchOpen(true);
+                }} />
+              </li>
+
+              <li>
+                <Button icon={Mails} type="primary" onClick={() => {
+                  setDialogOpen(true);
+                }}>Contact</Button>
               </li>
             </ul>
           </div>
         </div>
       </nav>
 
-      { dialogOpen &&
-        <Dialog title="Contact" closeAction={() => { setDialogOpen(false); }}>
+      {dialogOpen &&
+        <Dialog title="Contact" closeAction={() => {
+          setDialogOpen(false); }}>
           <form onSubmit={onSubmit}>
             <Input required name="name"  type="text"     label="Name" />
             <Input required name="email" type="email"    label="E-Mail" />
@@ -128,6 +149,22 @@ export default function Navbar({ page }) {
           </form>
 
           <p style={{ textAlign: 'center', marginTop: '1rem' }}>Or send an email to <Link href="mailto:admin@theclashfruit.me">admin@theclashfruit.me</Link></p>
+        </Dialog>
+      }
+
+      {searchOpen &&
+        <Dialog title="Search" closeAction={() => { setSearchOpen(false); }}>
+          <form action="/search" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', justifyContent: 'center' }}>
+            <Input required name="q" type="text" label={router.query.q !== undefined ? router.query.q : 'Search...'} style={{ margin: 0 }} />
+
+            <Input required name="type" type="select" style={{ margin: 0 }}>
+              <option value="post">Posts</option>
+              <option value="project">Projects</option>
+              <option value="all">Both</option>
+            </Input>
+
+            <Button icon={Search} type="icon" />
+          </form>
         </Dialog>
       }
     </>

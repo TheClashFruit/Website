@@ -18,6 +18,7 @@ CREATE TABLE `posts` (
   `license_id` int(11) NOT NULL,
   `permalink` varchar(255) NOT NULL,
   `tags` varchar(255) NOT NULL,
+  `image_url` varchar(2048) NOT NULL,
   `title` varchar(50) NOT NULL,
   `content` LONGTEXT NOT NULL,
   `created` timestamp NOT NULL DEFAULT current_timestamp(),

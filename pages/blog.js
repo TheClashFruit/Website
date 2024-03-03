@@ -15,6 +15,7 @@ import {
 import styles from '@/styles/Blog.module.scss';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Blog({ posts, page, totalPages }) {
   return (
@@ -39,9 +40,13 @@ export default function Blog({ posts, page, totalPages }) {
               posts.map((post, index) => {
                 return (
                   <Link key={index} href={`/post/${post.permalink}`} className={styles.blogCardWrapperLink}>
-                    <Card className={styles.blogCard} style={{ '--image': 'url("https://cdn-new.theclashfruit.me/gallery/IMG_1707.jpg")' }}>
+                    <Card className={styles.blogCard}>
                       <div className={styles.header}>
-                        <Button onClick={() => { navigator.share({ title: post.title, text: post.content.split(' ', 35).join(' '), url: `https://theclashfruit.me/post/${post.permalink}` }); }} icon={Share2} type="icon" />
+                        <Image src={post.image_url} alt={`Banner of "${post.title}".`} width={356} height={216} />
+
+                        <div className={styles.headerOverlay}>
+                          <Button onClick={() => { navigator.share({ title: post.title, text: post.content.split(' ', 35).join(' '), url: `https://theclashfruit.me/post/${post.permalink}` }); }} icon={Share2} type="icon" />
+                        </div>
                       </div>
                       <div className={styles.content}>
                         <div className={styles.title}>
@@ -75,8 +80,8 @@ export async function getServerSideProps({ query }) {
     limit: query.page !== undefined ? Math.floor((query.page - 1) * 10) + 10 : 10,
   };
 
-  const posts = await db.getPosts(page.offset, page.limit, query.q);
-  const totalPosts = await db.getPostCount(query.q);
+  const posts = await db.getPosts(page.offset, page.limit);
+  const totalPosts = await db.getPostCount();
 
   return {
     props: {

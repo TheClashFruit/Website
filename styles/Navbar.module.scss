@@ -34,11 +34,13 @@
         fill: #0F766E;
       }
 
-      > .navToggle {
+      > div {
         display: none;
 
         @media (max-width: 768px) {
           display: flex;
+
+          gap: 0.5rem;
         }
       }
     }
@@ -80,6 +82,16 @@
                   color: rgba($colorTextDark1, 1);
                 }
               }
+            }
+          }
+        }
+
+        &.navButtons {
+          gap: 0.5rem;
+
+          @media (max-width: 768px) {
+            li:first-child {
+              display: none;
             }
           }
         }

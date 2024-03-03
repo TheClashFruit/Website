@@ -44,7 +44,7 @@ export default function Meta({ pageData }) {
           <meta property="og:type" content="article"/>
           <meta property="og:locale" content="en_GB"/>
           <meta property="og:url" content="https://theclashfruit.me"/>
-          <meta property="og:image" content="https://www.theclashfruit.me/img/logo.png"/>
+          <meta property="og:image" content={pageData.post.image_url}/>
           <meta property="og:description" content={pageData.post.content.split(' ', 35).join(' ')}/>
 
           <meta property="article:published_time" content={new Date(pageData.post.created).toISOString()}/>
@@ -74,7 +74,7 @@ export default function Meta({ pageData }) {
                 "query-input": "required name=q"
                 "target": {
                   "@type": "EntryPoint",
-                  "urlTemplate": "https://theclashfruit.me/blog?q={q}"
+                  "urlTemplate": "https://theclashfruit.me/search?q={q}&type=all"
                 }
               }
             ]
