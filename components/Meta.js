@@ -105,8 +105,7 @@ export default function Meta({ pageData }) {
         `}
       </script>
 
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1510964912637528"
-              crossOrigin="anonymous"/>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1510964912637528" crossOrigin="anonymous"/>
     </Head>
   );
 }
