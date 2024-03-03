@@ -46,6 +46,26 @@ export default function Meta({ pageData }) {
       ]
     };
   }
+  
+  if (pageData.type === 'video') {
+    structuredData.video = {
+      '@context': 'https://schema.org',
+      '@type': 'VideoObject',
+      'name': pageData.title,
+      'description': pageData.video.description,
+      'thumbnailUrl': pageData.video.thumbnail,
+      'uploadDate': pageData.video.date.toISOString(),
+      'duration': pageData.video.duration,
+      'contentUrl': pageData.video.url,
+      'embedUrl': pageData.video.embed,
+      'interactionStatistic': {
+        '@type': 'InteractionCounter',
+        'interactionType': { '@type': 'WatchAction' },
+        'userInteractionCount': 5647018
+      }
+    }
+    ;
+  }
 
   return (
     <Head>
@@ -56,6 +76,8 @@ export default function Meta({ pageData }) {
 
       <meta property="tcf:page_data" content={JSON.stringify(pageData)}/>
       <meta name="robots" content={robots}/>
+
+      <link rel="alternate" type="application/rss+xml" href="https://theclashfruit.me/rss.xml"/>
 
       {pageData.type === 'page' && (
         <>
@@ -125,11 +147,15 @@ export default function Meta({ pageData }) {
           <meta property="og:locale" content="en_GB"/>
           <meta property="og:url" content="https://theclashfruit.me"/>
 
-          <meta property="og:video" content={pageData.url}/>
-          <meta property="og:video:secure_url" content={pageData.url}/>
+          <meta property="og:video" content={pageData.video.url}/>
+          <meta property="og:video:secure_url" content={pageData.video.url}/>
           <meta property="og:video:type" content="video/mp4"/>
-          <meta property="og:video:width" content="1280"/>
-          <meta property="og:video:height" content="720"/>
+          <meta property="og:video:width" content={pageData.video.size.w}/>
+          <meta property="og:video:height" content={pageData.video.size.h}/>
+
+          <script type="application/ld+json">
+            {JSON.stringify(structuredData.video, null, 2)}
+          </script>
         </>
       )}
 
