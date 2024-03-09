@@ -14,7 +14,7 @@ import {
 import Dialog from '@/components/Dialog';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
-import {Download, Forward} from 'lucide-react';
+import {Download, Info} from 'lucide-react';
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -51,14 +51,10 @@ export default function Gallery({ gallery, page, totalPages }) {
 
       <main>
         <div className={styles.container}>
-          <Card style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: 'calc((8px * 2) + 90px)', padding: '8px' }}>
-            <AdBanner
-              data-ad-client="ca-pub-1510964912637528"
-              data-ad-slot="3830865920"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            />
-          </Card>
+          <AdBanner
+            data-ad-client="ca-pub-1510964912637528"
+            data-ad-slot="3830865920"
+          />
 
           <div className={styles.galleryGrid}>
             {

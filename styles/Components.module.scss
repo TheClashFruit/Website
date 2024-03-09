@@ -342,3 +342,46 @@ textarea.inputText {
     gap: 8px;
   }
 }
+
+.adBanner {
+  position: relative;
+
+  width: 100%;
+  height: calc((8px * 2) + 90px);
+
+  padding: 8px;
+
+  > .adContent {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+  }
+
+  > .adGoogle {
+    position: absolute;
+
+    top: 8px;
+    bottom: 8px;
+
+    left: 8px;
+    right: 8px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+  }
+
+  > .adAboutButton {
+    position: absolute;
+
+    top: 8px;
+    right: 8px;
+  }
+}

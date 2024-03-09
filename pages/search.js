@@ -27,14 +27,10 @@ export default function Search({ q, everything, page, totalPages }) {
 
       <main>
         <div className={styles.container}>
-          <Card style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: 'calc((8px * 2) + 90px)', padding: '8px' }}>
-            <AdBanner
-              data-ad-client="ca-pub-1510964912637528"
-              data-ad-slot="3830865920"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            />
-          </Card>
+          <AdBanner
+            data-ad-client="ca-pub-1510964912637528"
+            data-ad-slot="3830865920"
+          />
 
           <div className={styles.postsGrid}>
             {
