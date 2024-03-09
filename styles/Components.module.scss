@@ -380,6 +380,10 @@ textarea.inputText {
     &:has(ins[data-blocked="yes"]), &:has(ins[data-ad-status="unfilled"]), &:has(ins:empty) {
       display: none;
     }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 
   > .adAboutButton {
