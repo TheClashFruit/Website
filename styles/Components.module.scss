@@ -376,6 +376,10 @@ textarea.inputText {
 
     align-items: center;
     justify-content: center;
+
+    &:has(ins[style*="display: none"]), &:has(ins[data-ad-status="unfilled"]) {
+      display: none;
+    }
   }
 
   > .adAboutButton {
