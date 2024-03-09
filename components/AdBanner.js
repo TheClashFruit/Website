@@ -41,19 +41,12 @@ export default function AdBanner(props) {
       </div>
 
       <div className={styles.adGoogle}>
-        <ins className={`adsbygoogle ${styles.adDesktop}`} style={{
+        <ins className="adsbygoogle" style={{
           display: 'inline-block',
           overflow: 'hidden',
           width: '728px',
           height: '90px'
         }} data-ad-client="ca-pub-1510964912637528" ref={googleAdRef} {...props}/>
-
-        <ins className={`adsbygoogle ${styles.adMobile}`} style={{
-          display: 'inline-block',
-          overflow: 'hidden',
-          width: '400px',
-          height: '90px'
-        }} data-ad-client="ca-pub-1510964912637528" data-ad-slot="6363427510" ref={googleAdRef}/>
       </div>
 
       <Button className={styles.adAboutButton} icon={Info} type="icon"/> </Card>
