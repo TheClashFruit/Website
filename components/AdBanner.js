@@ -13,6 +13,10 @@ export default function AdBanner(props) {
     } catch (err) {
       console.log(err);
     }
+
+    if(document.querySelector(`.${styles.adGoogle} > ins`).style.display === 'none') {
+      document.querySelector(`.${styles.adGoogle} > ins`).setAttribute('data-blocked', 'yes');
+    }
   }, []);
 
   return (
