@@ -27,13 +27,14 @@ export default function Blog({ posts, page, totalPages }) {
 
       <main>
         <div className={styles.container}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '90px' }}>
+          <Card style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: 'calc((8px * 2) + 90px)', padding: '8px' }}>
             <AdBanner
-              style={{ display: 'inline-block' }}
               data-ad-client="ca-pub-1510964912637528"
               data-ad-slot="3830865920"
+              data-ad-format="auto"
+              data-full-width-responsive="true"
             />
-          </div>
+          </Card>
 
           <div className={styles.postsGrid}>
             {

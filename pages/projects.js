@@ -6,6 +6,8 @@ import Header from '@/components/Header';
 import styles from '@/styles/Projects.module.scss';
 import Database from '@/lib/Database';
 import Paginator from '@/components/Paginator';
+import AdBanner from '@/components/AdBanner';
+import Card from '@/components/Card';
 
 export default function Projects({ projects, page, totalPages }) {
   return (
@@ -17,6 +19,10 @@ export default function Projects({ projects, page, totalPages }) {
 
       <main>
         <div className={styles.container}>
+          <p>
+            I&apos;ll add the stuff soon don&apos;t worry!!
+          </p>
+
           <Paginator page={Number.parseInt(page)} totalPages={Number.parseInt(totalPages)} />
         </div>
       </main>

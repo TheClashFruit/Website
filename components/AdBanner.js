@@ -11,7 +11,7 @@ export default function AdBanner(props) {
 
   return (
     <ins
-      className="adsbygoogle adbanner-customize"
+      className="adsbygoogle"
       style={{
         display: 'block',
         overflow: 'hidden',
