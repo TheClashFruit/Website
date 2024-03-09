@@ -377,7 +377,7 @@ textarea.inputText {
     align-items: center;
     justify-content: center;
 
-    &:has(ins[data-blocked="yes"]), &:has(ins[data-ad-status="unfilled"]) {
+    &:has(ins[data-blocked="yes"]), &:has(ins[data-ad-status="unfilled"]), &:has(ins:empty) {
       display: none;
     }
   }

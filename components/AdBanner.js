@@ -1,12 +1,14 @@
 import styles from '@/styles/Components.module.scss';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Button from '@/components/Button';
 import {Info} from 'lucide-react';
 import Card from '@/components/Card';
 
 export default function AdBanner(props) {
+  const googleAdRef = useRef(null);
+
   useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -14,10 +16,12 @@ export default function AdBanner(props) {
       console.log(err);
     }
 
-    if(document.querySelector(`.${styles.adGoogle} > ins`).style.display === 'none') {
-      document.querySelector(`.${styles.adGoogle} > ins`).setAttribute('data-blocked', 'yes');
+    try {
+      fetch(new Request('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')).catch(_ => googleAdRef.current.setAttribute('data-blocked', 'yes'));
+    } catch (e) {
+      googleAdRef.current.setAttribute('data-blocked', 'yes');
     }
-  }, []);
+  }, [ googleAdRef ]);
 
   return (
     <Card className={styles.adBanner}>
@@ -35,7 +39,7 @@ export default function AdBanner(props) {
           overflow: 'hidden',
           width: '728px',
           height: '90px'
-        }} data-ad-client="ca-pub-1510964912637528"{...props}/>
+        }} data-ad-client="ca-pub-1510964912637528" ref={googleAdRef} {...props}/>
       </div>
 
       <Button className={styles.adAboutButton} icon={Info} type="icon"/> </Card>
