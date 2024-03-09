@@ -21,6 +21,13 @@ export default function AdBanner(props) {
     } catch (e) {
       googleAdRef.current.setAttribute('data-blocked', 'yes');
     }
+
+    document.addEventListener('load', () => {
+      if (document.body.clientWidth < 768) {
+        googleAdRef.current.style.height = '100px';
+        googleAdRef.current.style.width = '400px';
+      }
+    });
   }, [ googleAdRef ]);
 
   return (
@@ -34,12 +41,19 @@ export default function AdBanner(props) {
       </div>
 
       <div className={styles.adGoogle}>
-        <ins className="adsbygoogle" style={{
+        <ins className={`adsbygoogle ${styles.adDesktop}`} style={{
           display: 'inline-block',
           overflow: 'hidden',
           width: '728px',
           height: '90px'
         }} data-ad-client="ca-pub-1510964912637528" ref={googleAdRef} {...props}/>
+
+        <ins className={`adsbygoogle ${styles.adMobile}`} style={{
+          display: 'inline-block',
+          overflow: 'hidden',
+          width: '400px',
+          height: '90px'
+        }} data-ad-client="ca-pub-1510964912637528" data-ad-slot="6363427510" ref={googleAdRef}/>
       </div>
 
       <Button className={styles.adAboutButton} icon={Info} type="icon"/> </Card>

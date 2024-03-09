@@ -389,3 +389,19 @@ textarea.inputText {
     right: 8px;
   }
 }
+
+.adMobile {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: inline-block;
+  }
+}
+
+.adDesktop {
+  display: inline-block;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
