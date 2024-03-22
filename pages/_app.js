@@ -1,7 +1,7 @@
 import '@/styles/globals.scss';
 
 import ConsentBanner from '@/components/ConsentBanner';
-import Script from 'next/script'
+import Script from 'next/script';
 
 import { init, push } from '@socialgouv/matomo-next';
 
