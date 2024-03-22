@@ -31,7 +31,10 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       { !isDismissed && <ConsentBanner /> }
+      
       <Component {...pageProps} />
+
+      <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
     </>
   );
 }
