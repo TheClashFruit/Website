@@ -13,18 +13,21 @@ export default function RssFeed() {
 }
 
 export async function getServerSideProps({ res }) {
+  const db   = new Database();
+
+  const posts = await db.getPosts();
+
   const feedOptions = {
     title: 'TheClashFruit\'s Blog',
     description: 'I\'m TheClashFruit and I like to program, explore and craft stuff. I also like to play games. I have 3 Linux servers.. So, as you can see, I like to play around with Linux too.',
     site_url: 'https://theclashfruit.me',
     feed_url: 'https://theclashfruit.me/rss.xml',
     image_url: 'https://theclashfruit.me/icons/logo.svg',
-    pubDate: new Date(1706363565 * 1000).getTime(),
+    pubDate: posts[0].created,
     copyright: `Copyright © ${new Date().getFullYear()} TheClashFruit`,
   };
 
   const feed = new RSS(feedOptions);
-  const db   = new Database();
 
   const converter = new showdown.Converter({
     extensions: [
@@ -39,19 +42,29 @@ export async function getServerSideProps({ res }) {
 
   converter.setFlavor('github');
 
-  const posts = await db.getPosts();
-
-  posts.forEach((post) => {
+  for (let i = 0; i < posts.length; i++) {
+    const post = posts[i];
     const html = converter.makeHtml(post.content);
 
-    feed.item({
-      title: post.title,
-      description: html,
-      url: `https://theclashfruit.me/post/${post.permalink}`,
-      guid: post.permalink,
-      categories: post.categories
-    });
-  });
+    await fetch(post.image_url)
+      .then(res => res.blob())
+      .then(blob => {
+        feed.item({
+          title: post.title,
+          author: post.author.display_name,
+          date: post.created,
+          categories: post.tags,
+          description: html,
+          url: `https://theclashfruit.me/post/${post.permalink}`,
+          guid: post.permalink,
+          enclosure: {
+            url: post.image_url,
+            size: blob.size,
+            type: blob.type
+          }
+        });
+      });
+  }
 
   res.setHeader('Content-Type', 'text/xml');
   res.write(feed.xml({ indent: true }));
