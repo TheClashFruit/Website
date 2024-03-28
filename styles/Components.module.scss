@@ -315,6 +315,95 @@ textarea.inputText {
     align-items: end;
   }
 
+  .blogPostHero {
+    display: flex;
+
+    flex-direction: column;
+
+    margin-top: 64px;
+
+    position: relative;
+
+    border-radius: 16px;
+    border: 1px solid rgba($colorBorderLight2, 0.3);
+
+    overflow: hidden;
+
+    height: calc(100% - 64px);
+
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid rgba($colorBorderDark2, 0.3);
+    }
+
+    > img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    > .headerOverlay {
+      position: absolute;
+
+      padding: 1.5rem;
+
+      top: 0;
+
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: end;
+
+      background: linear-gradient(180deg, rgba($colorSurfaceLight2, 0.16) 0%, rgba($colorSurfaceLight2, 0.75) 50%, $colorSurfaceLight2 100%) 100% / cover no-repeat;
+
+      @media (prefers-color-scheme: dark) {
+        background: linear-gradient(180deg, rgba($colorSurfaceDark2, 0.16) 0%, rgba($colorSurfaceDark2, 0.75) 50%, $colorSurfaceDark2 100%) 100% / cover no-repeat;
+      }
+
+      > h1 {
+        font-size: 1.95rem;
+
+        margin-bottom: 0.1rem;
+      }
+
+      > p {
+        margin: 0;
+
+        color: rgba($colorTextLight1, 0.75);
+
+        font-size: 1rem;
+
+        @media (prefers-color-scheme: dark) {
+          color: $colorTextDark1;
+        }
+      }
+    }
+
+    @media (max-width: 1130px) {
+      padding: 0;
+    }
+
+    @media (max-width: 768px) {
+      margin-top: 0;
+      padding: 0;
+
+      border-radius: 0;
+      border: none;
+
+      height: 100%;
+
+      border-bottom: 1px solid rgba($colorBorderDark2, 0.3);
+
+      @media (max-width: 768px) {
+        border-bottom: 1px solid rgba($colorBorderDark2, 0.3);
+      }
+    }
+  }
+
   @media print {
     min-height: 0;
     height: fit-content;

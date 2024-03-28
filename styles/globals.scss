@@ -169,6 +169,54 @@ pre > code {
 
 // -----
 
+article {
+  padding-top: 1rem;
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
+
+    position: relative;
+
+    transition: 100ms;
+
+    > .sectionLink {
+      visibility: hidden;
+
+      position: absolute;
+
+      left: -2rem;
+
+      width: 2rem;
+
+      &:hover {
+        visibility: visible;
+      }
+
+      @media (max-width: 1130px) {
+        left: calc(100% - 1.5rem);
+
+        width: 1rem;
+      }
+    }
+
+    &:hover {
+      > .sectionLink {
+        visibility: visible;
+      }
+    }
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+}
+
+// -----
+
 #__next {
   display: flex;
   flex-direction: column;

@@ -12,6 +12,7 @@ import 'showdown-youtube';
 import Database from '@/lib/Database';
 
 import styles from '@/styles/Home.module.scss';
+import {useEffect} from 'react';
 
 export default function Post({ postData }) {
   return (
@@ -19,10 +20,10 @@ export default function Post({ postData }) {
       <Meta pageData={{ title: postData.title, type: 'post', post: postData }} />
 
       <Navbar page="post" />
-      <Header title={postData.title} />
+      <Header title={postData.title} postData={postData} />
 
       <main>
-        <div className={styles.container} dangerouslySetInnerHTML={{ __html: postData.content }} />
+        <article className={styles.container} dangerouslySetInnerHTML={{ __html: postData.content }} />
       </main>
 
       <Footer shareData={{ title: postData.title, text: postData.short_readme, url: `https://theclashfruit.me/post/${postData.permalink}` }} />
@@ -41,6 +42,16 @@ export async function getServerSideProps(context) {
     };
   }
 
+  showdown.extension('header-anchors', function() {
+    let ancTpl = '$1<div class="sectionLink" aria-hidden="true"><a href="#$3">#</a></div>$4';
+
+    return [{
+      type: 'html',
+      regex: /(<h([1-3]) id="([^"]+?)">)(.*<\/h\2>)/g,
+      replace: ancTpl
+    }];
+  });
+
   const converter = new showdown.Converter({
     extensions: [
       showdownHighlight({
@@ -48,6 +59,7 @@ export async function getServerSideProps(context) {
         auto_detection: true
       }),
       'youtube',
+      'header-anchors',
       footnotes
     ]
   });
