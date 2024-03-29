@@ -26,6 +26,9 @@ dependencies:
   install:
     specifier: ^0.13.0
     version: 0.13.0
+  jose:
+    specifier: ^5.2.3
+    version: 5.2.3
   lru-cache:
     specifier: ^10.2.0
     version: 10.2.0
@@ -4470,6 +4473,10 @@ packages:
       reflect.getprototypeof: 1.0.4
       set-function-name: 2.0.1
     dev: true
+
+  /jose@5.2.3:
+    resolution: {integrity: sha512-KUXdbctm1uHVL8BYhnyHkgp3zDX5KW8ZhAKVFEfUbU2P8Alpzjb+48hHvjOdQIyPshoblhzsuqOwEEAbtHVirA==}
+    dev: false
 
   /js-file-download@0.4.12:
     resolution: {integrity: sha512-rML+NkoD08p5Dllpjo0ffy4jRHeY6Zsapvr/W86N7E0yuzAO6qa5X9+xog6zQNlH102J7IXljNY2FtS6Lj3ucg==}
