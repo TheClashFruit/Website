@@ -52,6 +52,7 @@ export async function getServerSideProps(context) {
       'header-anchors',
       'improved-tables',
       'custom-emoji',
+      'timestamp',
       footnotes
     ]
   });

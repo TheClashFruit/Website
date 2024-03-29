@@ -7,6 +7,7 @@ import showdownHighlight from 'showdown-highlight';
 import footnotes from 'showdown-footnotes';
 
 import 'showdown-youtube';
+import '@/lib/MarkdownExtensions';
 
 export default function RssFeed() {
   // it's the server's job!
@@ -36,6 +37,7 @@ export async function getServerSideProps({ res }) {
         auto_detection: true
       }),
       'youtube',
+      'timestamp',
       footnotes
     ]
   });
