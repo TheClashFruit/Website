@@ -8,11 +8,11 @@ import showdownHighlight from 'showdown-highlight';
 import footnotes from 'showdown-footnotes';
 
 import 'showdown-youtube';
+import '@/lib/MarkdownExtensions';
 
 import Database from '@/lib/Database';
 
 import styles from '@/styles/Home.module.scss';
-import {useEffect} from 'react';
 
 export default function Post({ postData }) {
   return (
@@ -42,16 +42,6 @@ export async function getServerSideProps(context) {
     };
   }
 
-  showdown.extension('header-anchors', function() {
-    let ancTpl = '$1<div class="sectionLink" aria-hidden="true"><a href="#$3">#</a></div>$4';
-
-    return [{
-      type: 'html',
-      regex: /(<h([1-3]) id="([^"]+?)">)(.*<\/h\2>)/g,
-      replace: ancTpl
-    }];
-  });
-
   const converter = new showdown.Converter({
     extensions: [
       showdownHighlight({
@@ -60,6 +50,8 @@ export async function getServerSideProps(context) {
       }),
       'youtube',
       'header-anchors',
+      'improved-tables',
+      'custom-emoji',
       footnotes
     ]
   });
