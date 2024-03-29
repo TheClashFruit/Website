@@ -16,6 +16,13 @@ import styles from '@/styles/Blog.module.scss';
 
 import Link from 'next/link';
 import Image from 'next/image';
+import showdown from 'showdown';
+
+import showdownHighlight from 'showdown-highlight';
+import footnotes from 'showdown-footnotes';
+
+import 'showdown-youtube';
+import '@/lib/MarkdownExtensions';
 
 export default function Blog({ posts, page, totalPages }) {
   return (
@@ -51,7 +58,7 @@ export default function Blog({ posts, page, totalPages }) {
                           <label>{post.author.display_name}</label>
                         </div>
 
-                        <p>{post.content.split(' ', 35).join(' ')}...</p>
+                        <p>{post.content.replace(/<[^>]*>?/gm, '').split('', 200).join('')}...</p>
                       </div>
                     </Card>
                   </Link>
@@ -79,6 +86,27 @@ export async function getServerSideProps({ query }) {
 
   const posts = await db.getPosts(page.offset, page.limit);
   const totalPosts = await db.getPostCount();
+
+  const converter = new showdown.Converter({
+    extensions: [
+      showdownHighlight({
+        pre: true,
+        auto_detection: true
+      }),
+      'youtube',
+      'header-anchors',
+      'improved-tables',
+      'custom-emoji',
+      'timestamp',
+      footnotes
+    ]
+  });
+
+  converter.setFlavor('github');
+
+  posts.forEach(post => {
+    post.content = converter.makeHtml(post.content);
+  });
 
   return {
     props: {

@@ -103,7 +103,7 @@ export default function Meta({ pageData }) {
       {pageData.type === 'post' && (
         <>
           <meta name="name" content={`TheClashFruit &bull; ${pageData.title}`}/>
-          <meta name="description" content={pageData.post.content.split(' ', 35).join(' ')}/>
+          <meta name="description" content={pageData.post.content.replace(/<[^>]*>?/gm, '').split('', 200).join('')}/>
           <meta name="keywords" content={`theclashfruit, tcf, blokkok, the, clash, fruit, ${pageData.title.trim().split(' ').join(', ').toLowerCase()}, ${pageData.post.tags.join(', ').toLowerCase()}`}/>
           <meta name="theme-color" content="#00796B"/>
 
@@ -113,7 +113,7 @@ export default function Meta({ pageData }) {
           <meta property="og:locale" content="en_GB"/>
           <meta property="og:url" content="https://theclashfruit.me"/>
           <meta property="og:image" content={pageData.post.image_url}/>
-          <meta property="og:description" content={pageData.post.content.split(' ', 35).join(' ')}/>
+          <meta property="og:description" content={pageData.post.content.replace(/<[^>]*>?/gm, '').split('', 200).join('')}/>
 
           <meta property="article:published_time" content={new Date(pageData.post.created).toISOString()}/>
           <meta property="article:modified_time" content={new Date(pageData.post.updated).toISOString()}/>
