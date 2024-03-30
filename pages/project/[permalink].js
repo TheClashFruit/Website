@@ -14,19 +14,19 @@ import Database from '@/lib/Database';
 
 import styles from '@/styles/Home.module.scss';
 
-export default function Post({ postData }) {
+export default function Project({ projectData }) {
   return (
     <>
-      <Meta pageData={{ title: postData.title, type: 'post', post: postData }} />
+      <Meta pageData={{ title: projectData.title, type: 'project', project: projectData }} />
 
-      <Navbar page="post" />
-      <Header title={postData.title} postData={postData} />
+      <Navbar page="project" />
+      <Header title={projectData.title} projectData={projectData} />
 
       <main>
-        <article className={styles.container} dangerouslySetInnerHTML={{ __html: postData.content }} />
+        <article className={styles.container} dangerouslySetInnerHTML={{ __html: projectData.readme }} />
       </main>
 
-      <Footer shareData={{ title: postData.title, text: postData.content.replace(/<[^>]*>?/gm, '').split('', 200).join(''), url: `https://theclashfruit.me/post/${postData.permalink}` }} />
+      <Footer shareData={{ title: projectData.title, text: projectData.short_readme, url: `https://theclashfruit.me/project/${projectData.permalink}` }} />
     </>
   );
 }
@@ -34,9 +34,9 @@ export default function Post({ postData }) {
 export async function getServerSideProps(context) {
   const db = new Database();
 
-  const postData = await db.getPost(context.params.permalink);
+  const projectData = await db.getProject(context.params.permalink);
 
-  if(!postData) {
+  if(!projectData) {
     return {
       notFound: true
     };
@@ -59,11 +59,11 @@ export async function getServerSideProps(context) {
 
   converter.setFlavor('github');
 
-  postData.content = converter.makeHtml(postData.content);
+  projectData.readme = converter.makeHtml(projectData.readme);
 
   return {
     props: {
-      postData,
+      projectData,
     }
   };
 }

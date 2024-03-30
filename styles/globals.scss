@@ -244,6 +244,19 @@ article {
     font-size: 1.1rem;
   }
 
+  ol, ul {
+    margin-bottom: 1rem;
+
+    padding-left: 1.5rem;
+
+    li {
+      line-height: 1.7;
+      font-size: 1rem;
+
+      margin-bottom: 0.2rem;
+    }
+  }
+
   pre {
     margin-bottom: 1rem;
   }
@@ -302,7 +315,7 @@ article {
   table {
     border-collapse: collapse;
 
-    width: fit-content;
+    min-width: 100%;
 
     table-layout: fixed;
 

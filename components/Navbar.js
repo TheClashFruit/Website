@@ -34,6 +34,9 @@ export default function Navbar({ page }) {
   const [ dialogOpen, setDialogOpen ] = useState(false);
   const [ searchOpen, setSearchOpen ] = useState(false);
 
+  const [ navCounter, setNavCounter ] = useState(0);
+  const [ isEgged, setIsEgged ]       = useState(false);
+
   useEffect(() => {
     if(window.scrollY <= 30 && navRef.current !== null)
       navRef.current.classList.remove(styles.navBarScrolled);
@@ -46,6 +49,9 @@ export default function Navbar({ page }) {
       else if(navRef.current !== null)
         navRef.current.classList.add(styles.navBarScrolled);
     });
+
+    if (localStorage.getItem('isEgged') === 'true')
+      setIsEgged(true);
   }, []);
 
   const onSubmit = async (e) => {
@@ -88,12 +94,45 @@ export default function Navbar({ page }) {
     }
   };
 
+  const easterEgg = (e) => {
+    if(navCounter === 3) {
+      if (isEgged) {
+        setIsEgged(false);
+
+        localStorage.setItem('isEgged', 'false');
+      } else {
+        setIsEgged(true);
+
+        localStorage.setItem('isEgged', 'true');
+      }
+
+      setNavCounter(0);
+    } else {
+      setNavCounter(navCounter + 1);
+    }
+  };
+
   return (
     <>
+      {isEgged &&
+        <style global jsx>{`
+          @import url('https://cdn.jsdelivr.net/npm/comic-mono@0.0.1/index.css');
+          @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+        
+          * {
+            font-family: 'Comic Sans MS', 'Comic Sans', 'Comic Neue', cursive !important;
+          }
+          
+          pre, code {
+            font-family: 'Comic Mono', monospace !important;
+          }
+        `}</style>
+      }
+
       <nav className={styles.navBar} ref={navRef}>
         <div className={styles.container}>
           <div className={styles.navLogoContainer}>
-            <Logo className={styles.navLogo} width={32} height={32} viewBox="0 0 24 24" />
+            <Logo className={styles.navLogo} width={32} height={32} viewBox="0 0 24 24" onClick={easterEgg} />
 
             <div>
               <Button icon={Search} type="icon" onClick={() => {

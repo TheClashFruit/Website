@@ -43,7 +43,7 @@ export default function AdBanner(props) {
         <div className={styles.adContent}>
           <h3>Support Me</h3>
 
-          <p style={{marginBottom: 0}}>If you like my work you can support me on <Link href="https://ko-fi.com/TheClashFruit">Ko-Fi</Link> or on <Link href="https://github.com/sponsors/TheClashFruit/">GitHub Sponsors</Link>.</p>
+          <p style={{marginBottom: 0}}>If you like my work you can support me on <Link href="https://ko-fi.com/TheClashFruit" target="_blank">Ko-Fi</Link> or on <Link href="https://github.com/sponsors/TheClashFruit/" target="_blank">GitHub Sponsors</Link>.</p>
         </div>
 
         <div className={styles.adGoogle}>
