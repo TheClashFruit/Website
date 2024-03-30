@@ -100,6 +100,18 @@ CREATE TABLE `licenses` (
   PRIMARY KEY(`id`)
 );
 ###
+CREATE TABLE `vitals` (
+  `id` varchar(255) NOT NULL,
+  `time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `name` varchar(255) NOT NULL,
+  `navigation_type` varchar(255) NOT NULL,
+  `rating` varchar(255) NOT NULL,
+  `entries` JSON NOT NULL,
+  `delta` FLOAT NOT NULL,
+  `value` FLOAT NOT NULL,
+  PRIMARY KEY(`id`)
+);
+###
 ALTER TABLE `comments` ADD FOREIGN KEY (`post_id`) REFERENCES `posts`(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 ###
 ALTER TABLE `versions` ADD FOREIGN KEY (`project_id`) REFERENCES `projects`(`id`) ON DELETE CASCADE ON UPDATE NO ACTION;

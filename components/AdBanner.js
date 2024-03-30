@@ -22,7 +22,7 @@ export default function AdBanner(props) {
     }
 
     try {
-      fetch(new Request('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')).catch(_ => googleAdRef.current.setAttribute('data-blocked', 'yes'));
+      fetch(new Request('/api/v2/ads/check')).catch(_ => googleAdRef.current.setAttribute('data-blocked', 'yes'));
     } catch (e) {
       googleAdRef.current.setAttribute('data-blocked', 'yes');
 

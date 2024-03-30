@@ -1,7 +1,10 @@
 import '@/styles/globals.scss';
 
 import ConsentBanner from '@/components/ConsentBanner';
+
 import Script from 'next/script';
+
+import { useReportWebVitals } from 'next/web-vitals';
 
 import { init, push } from '@socialgouv/matomo-next';
 
@@ -29,6 +32,13 @@ export default function App({ Component, pageProps }) {
     else
       push(['requireCookieConsent']);
   }, [ setIsDismissed ]);
+
+  useReportWebVitals((metric) => {
+    if (navigator.sendBeacon)
+      navigator.sendBeacon('/api/v2/analytics/vitals', JSON.stringify(metric));
+    else
+      fetch('/api/v2/analytics/vitals', { body: JSON.stringify(metric), method: 'POST', keepalive: true });
+  });
 
   return (
     <>
