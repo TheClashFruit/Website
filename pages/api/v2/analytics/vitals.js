@@ -17,7 +17,11 @@ export default async function handler(req, res) {
       });
 
     try {
-      await db.storeVital(JSON.parse(body));
+      let b = JSON.parse(body);
+
+      b.userAgent = headers['user-agent'];
+
+      await db.storeVital(b);
 
       res.status(200).json({
         tracked: true,

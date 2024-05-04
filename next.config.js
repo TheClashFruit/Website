@@ -11,7 +11,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'cdn-new.theclashfruit.me',
+        hostname: 'cdn.theclashfruit.me',
         port: '',
         pathname: '/**',
       },

@@ -104,6 +104,7 @@ CREATE TABLE `vitals` (
   `id` varchar(255) NOT NULL,
   `time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `name` varchar(255) NOT NULL,
+  `user_agent` VARCHAR(2048) NOT NULL,
   `navigation_type` varchar(255) NOT NULL,
   `rating` varchar(255) NOT NULL,
   `entries` JSON NOT NULL,
