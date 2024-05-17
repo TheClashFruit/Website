@@ -5,7 +5,7 @@ export default async function handler(req, res) {
 
   const query = req.query;
 
-  if (query.resource.startsWith('acct:')) {
+  if (query.resource.startsWith('acct:') && query.resource.endsWith('@theclashfruit.me')) {
     const user = await db.getUserFromUsername(query.resource.split(':')[1].split('@')[0]);
 
     if (user === null) {
