@@ -10,7 +10,7 @@ export default function Swagger() {
     <>
       <Meta pageData={{ title: 'Swagger UI', type: 'page' }} />
 
-      <SwaggerUI url="https://cdn-new.theclashfruit.me/data/swagger.json" />
+      <SwaggerUI url="https://cdn.theclashfruit.me/data/swagger.json" />
     </>
   );
 }

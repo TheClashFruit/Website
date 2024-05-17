@@ -7,7 +7,7 @@ export default function handler(req, res) {
     latest_version: 1,
     build_id: null,
     swagger: {
-      data: 'https://cdn-new.theclashfruit.me/data/swagger.json',
+      data: 'https://cdn.theclashfruit.me/data/swagger.json',
       ui: 'https://theclashfruit.me/docs/swagger',
     },
     versions: [

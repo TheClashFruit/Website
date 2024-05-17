@@ -18,13 +18,13 @@ export default async function handler(req, res) {
       'https://www.w3.org/ns/activitystreams',
       'https://w3id.org/security/v1'
     ],
-    id: `https://theclashfruit.me/api/${query.username}/actor`,
+    id: `https://theclashfruit.me/api/activitypub/${query.username}/actor`,
     type: 'Person',
     preferredUsername: user.display_name,
-    inbox: `https://theclashfruit.me/api/${query.username}/inbox`,
+    inbox: `https://theclashfruit.me/api/activitypub/${query.username}/inbox`,
     publicKey: {
-      id: `https://theclashfruit.me/api/${query.username}/actor#main-key`,
-      owner: `https://theclashfruit.me/api/${query.username}/actor`,
+      id: `https://theclashfruit.me/api/activitypub/${query.username}/actor#main-key`,
+      owner: `https://theclashfruit.me/api/activitypub/${query.username}/actor`,
       publicKeyPem: user.public_key
     }
   };
