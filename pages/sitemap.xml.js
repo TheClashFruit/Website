@@ -48,8 +48,6 @@ export async function getServerSideProps({ res }) {
   });
 
   posts.forEach(post => {
-    const dCreated = new Date(post.created);
-
     pages.push({
       loc: `https://theclashfruit.me/post/${post.permalink}`,
       lastmod: new Date(post.updated).toISOString(),
@@ -59,7 +57,7 @@ export async function getServerSideProps({ res }) {
           'news:name': 'TheClashFruit',
           'news:language': 'en'
         },
-        'news:publication_date': `${dCreated.getFullYear()}-${(dCreated.getMonth() + 1) < 10 ? '0' + (dCreated.getMonth() + 1) : (dCreated.getMonth() + 1)}-${dCreated.getDate()}`,
+        'news:publication_date': new Date(post.created).toISOString(),
         'news:title': post.title,
       }
     });
