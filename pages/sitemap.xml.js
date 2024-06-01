@@ -48,20 +48,46 @@ export async function getServerSideProps({ res }) {
   });
 
   posts.forEach(post => {
+    const dCreated = new Date(post.created);
+
     pages.push({
       loc: `https://theclashfruit.me/post/${post.permalink}`,
       lastmod: new Date(post.updated).toISOString(),
-      priority: 0.9
+      priority: 0.9,
+      'news:news': {
+        'news:publication': {
+          'news:name': 'TheClashFruit',
+          'news:language': 'en'
+        },
+        'news:publication_date': `${dCreated.getFullYear()}-${(dCreated.getMonth() + 1) < 10 ? '0' + (dCreated.getMonth() + 1) : (dCreated.getMonth() + 1)}-${dCreated.getDate()}`,
+        'news:title': post.title,
+      }
     });
   });
 
   let tmp = '';
 
   pages.forEach(page => {
-    tmp += `\n  <url>\n    <loc>${page.loc}</loc>\n    <lastmod>${page.lastmod}</lastmod>\n    <priority>${page.priority}</priority>\n  </url>`;
+    tmp += '\n  <url>'; // \n    <lastmod>${page.lastmod}</lastmod>\n    <priority>${page.priority}</priority>\n  </url>
+    tmp += `\n    <loc>${page.loc}</loc>`;
+    tmp += `\n    <lastmod>${page.lastmod}</lastmod>`;
+    tmp += `\n    <priority>${page.priority}</priority>`;
+
+    if (page['news:news']) {
+      tmp += '\n    <news:news>';
+      tmp += '\n      <news:publication>';
+      tmp += `\n        <news:name>${page['news:news']['news:publication']['news:name']}</news:name>`;
+      tmp += `\n        <news:language>${page['news:news']['news:publication']['news:language']}</news:language>`;
+      tmp += '\n      </news:publication>';
+      tmp += `\n      <news:publication_date>${page['news:news']['news:publication_date']}</news:publication_date>`;
+      tmp += `\n      <news:title>${page['news:news']['news:title']}</news:title>`;
+      tmp += '\n    </news:news>';
+    }
+
+    tmp += '\n  </url>';
   });
 
-  const siteMap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">${tmp}\n</urlset>`;
+  const siteMap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="https://www.google.com/schemas/sitemap-news/0.9">${tmp}\n</urlset>`;
 
   res.setHeader('Content-Type', 'text/xml');
   res.write(siteMap);
