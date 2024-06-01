@@ -66,7 +66,7 @@ export async function getServerSideProps({ res }) {
   let tmp = '';
 
   pages.forEach(page => {
-    tmp += '\n  <url>'; // \n    <lastmod>${page.lastmod}</lastmod>\n    <priority>${page.priority}</priority>\n  </url>
+    tmp += '\n  <url>';
     tmp += `\n    <loc>${page.loc}</loc>`;
     tmp += `\n    <lastmod>${page.lastmod}</lastmod>`;
     tmp += `\n    <priority>${page.priority}</priority>`;
@@ -85,7 +85,7 @@ export async function getServerSideProps({ res }) {
     tmp += '\n  </url>';
   });
 
-  const siteMap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="https://www.google.com/schemas/sitemap-news/0.9">${tmp}\n</urlset>`;
+  const siteMap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">${tmp}\n</urlset>`;
 
   res.setHeader('Content-Type', 'text/xml');
   res.write(siteMap);
