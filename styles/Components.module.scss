@@ -335,6 +335,10 @@ textarea.inputText {
       border: 1px solid rgba($colorBorderDark2, 0.3);
     }
 
+    @media print {
+      border: none;
+    }
+
     > img {
       width: 100%;
       height: 100%;
@@ -410,11 +414,13 @@ textarea.inputText {
 
     text-align: center;
 
+    border: none;
+
     h1 {
       width: 100%;
     }
 
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 }
 

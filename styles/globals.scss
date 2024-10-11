@@ -283,6 +283,15 @@ article {
       background: $colorSurfaceDark2;
     }
 
+    @media print {
+      padding: 0;
+
+      border-left: none;
+      border-radius: 0;
+
+      font-style: italic;
+    }
+
     p {
       margin: 0;
     }
