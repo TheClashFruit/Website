@@ -96,9 +96,7 @@ export default function Meta({ pageData }) {
           <meta property="og:image" content="https://www.theclashfruit.me/img/logo.png"/>
           <meta property="og:description" content="A full-stack web, mobile developer & mod creator."/>
 
-          <script type="application/ld+json">
-            {JSON.stringify(structuredData.page, null, 2)}
-          </script>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData.post) }} />
         </>
       )}
 
@@ -130,9 +128,7 @@ export default function Meta({ pageData }) {
             })
           }
 
-          <script type="application/ld+json">
-            {JSON.stringify(structuredData.post, null, 2)}
-          </script>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData.post) }} />
         </>
       )}
 
