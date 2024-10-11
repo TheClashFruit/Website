@@ -4,8 +4,7 @@ import Button from '@/components/Button';
 import Card from '@/components/Card';
 import ProgressBar from '@/components/ProgressBar';
 import Footer from '@/components/Footer';
-import Dialog from '@/components/Dialog';
-import Input from '@/components/Input';
+import Database from '@/lib/Database';
 
 import {
   SiYoutube,
@@ -28,71 +27,24 @@ import {
 
 import {
   ArrowDown,
-  Forward
+  Forward,
+  Share2
 } from 'lucide-react';
+
+import Link from 'next/link';
+import Image from 'next/image';
+
+import showdown from 'showdown';
+
+import showdownHighlight from 'showdown-highlight';
+import footnotes from 'showdown-footnotes';
+
+import 'showdown-youtube';
+import '@/lib/MarkdownExtensions';
 
 import styles from '@/styles/Home.module.scss';
 
-export default function Home() {
-  let skills = [
-    {
-      key: 'html',
-      icon: SiHtml5,
-      name: 'HTML',
-      percent: 100
-    },
-    {
-      key: 'css',
-      icon: SiCss3,
-      name: 'CSS',
-      percent: 98
-    },
-    {
-      key: 'js',
-      icon: SiJavascript,
-      name: 'JavaScript',
-      percent: 99
-    },
-    {
-      key: 'kt',
-      icon: SiKotlin,
-      name: 'Kotlin',
-      percent: 77
-    },
-    {
-      key: 'rs',
-      icon: SiRust,
-      name: 'Rust',
-      percent: 34
-    },
-    {
-      key: 'cs',
-      icon: SiCsharp,
-      name: 'C#',
-      percent: 78
-    },
-    {
-      key: 'py',
-      icon: SiPython,
-      name: 'Python',
-      percent: 69
-    },
-    {
-      key: 'fg',
-      icon: SiFigma,
-      name: 'Figma',
-      percent: 76
-    },
-    {
-      key: 'dr',
-      icon: SiDavinciresolve,
-      name: 'DaVinci Resolve',
-      percent: 12
-    }
-  ];
-
-  skills.sort((a, b) => b.percent - a.percent);
-
+export default function Home({ posts }) {
   return (
     <>
       <Meta pageData={{ title: 'Home', type: 'page' }} />
@@ -129,28 +81,41 @@ export default function Home() {
             </ul>
           </div>
 
-          <Button href="#skills" icon={ArrowDown} type="icon" title="Scroll Down" />
+          <Button href="#posts" icon={ArrowDown} type="icon" title="Scroll Down" />
         </div>
       </header>
 
       <main>
         <div className={styles.container}>
-          <div id="skills">
-            <h2>Skills</h2>
+          <div id="posts">
+            <h2>Latest Posts</h2>
 
-            <div className={styles.skillsGrid}>
-              {skills.map(skill => (
-                <Card className={styles.skillCard} key={skill.key}>
-                  <skill.icon size={48}/>
-                  <div className={styles.skillInner}>
-                    <div className={styles.skillLabel}>
-                      <h3>{skill.name}</h3>
-                      <label>{skill.percent}%</label>
-                    </div>
-                    <ProgressBar progress={skill.percent}/>
-                  </div>
-                </Card>
-              ))}
+            <div className={styles.postsGrid}>
+              {
+                posts.map((post, index) => {
+                  return (
+                    <Link key={index} href={`/post/${post.permalink}`} className={styles.blogCardWrapperLink}>
+                      <Card className={styles.blogCard}>
+                        <div className={styles.header}>
+                          <Image src={post.image_url} alt={`Banner of "${post.title}".`} width={356} height={216} />
+
+                          <div className={styles.headerOverlay}>
+                            <Button onClick={() => { navigator.share({ title: post.title, text: post.content.split(' ', 35).join(' '), url: `https://theclashfruit.me/post/${post.permalink}` }); }} icon={Share2} type="icon" />
+                          </div>
+                        </div>
+                        <div className={styles.content}>
+                          <div className={styles.title}>
+                            <h3>{post.title}</h3>
+                            <label>{post.author.display_name}</label>
+                          </div>
+
+                          <p>{post.content.replace(/<[^>]*>?/gm, '').split('', 200).join('')}...</p>
+                        </div>
+                      </Card>
+                    </Link>
+                  );
+                })
+              }
             </div>
           </div>
         </div>
@@ -159,4 +124,37 @@ export default function Home() {
       <Footer shareData={{ title: 'TheClashFruit', text: 'Check out TheClashFruit\'s site!', url: 'https://theclashfruit.me' }} />
     </>
   );
+}
+
+export async function getServerSideProps({ query }) {
+  const db = new Database();
+
+  const posts = await db.getPosts(0, 3);
+
+  const converter = new showdown.Converter({
+    extensions: [
+      showdownHighlight({
+        pre: true,
+        auto_detection: true
+      }),
+      'youtube',
+      'header-anchors',
+      'improved-tables',
+      'custom-emoji',
+      'timestamp',
+      footnotes
+    ]
+  });
+
+  converter.setFlavor('github');
+
+  posts.forEach(post => {
+    post.content = converter.makeHtml(post.content);
+  });
+
+  return {
+    props: {
+      posts,
+    }
+  };
 }

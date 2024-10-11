@@ -3,8 +3,10 @@ import rateLimit from '../../../lib/Ratelimit';
 import nodemailer from 'nodemailer';
 import showdown from 'showdown';
 
+import crypto from 'crypto';
+
 const limiter = rateLimit({
-  interval: 60 * 1000,
+  interval: 60 * 60 * 1000,
   uniqueTokenPerInterval: 500,
 });
 
@@ -19,8 +21,46 @@ export default async function handler(req, res) {
 
   converter.setFlavor('github');
 
+  const idempotencyKey = crypto.randomUUID();
+  const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+
   try {
     await limiter.check(res, 10, 'contact');
+
+    const userIp = req.headers['cf-connecting-ip'] || req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+    const method = 'POST';
+    const body = JSON.stringify({
+      secret: process.env.TURNSTILE_SECRET,
+      response: req.body.turnstile,
+      remoteip: userIp,
+      idempotency_key: idempotencyKey
+    });
+    const headers = {
+      'Content-Type': 'application/json'
+    };
+
+    const firstResult = await fetch(url, {
+      method,
+      body,
+      headers
+    });
+
+    const firstOutcome = await firstResult.json();
+
+    if (!firstOutcome.success)
+      return res.status(400).json({ error: 'invalid_turnstile', message: `The captcha response was invalid. (${JSON.stringify(firstOutcome['error-codes'])})` });
+
+    const subsequentResult = await fetch(url, {
+      method,
+      body,
+      headers
+    });
+
+    const subsequentOutcome = await subsequentResult.json();
+
+    if (!subsequentOutcome.success)
+      return res.status(400).json({ error: 'invalid_turnstile', message: `The captcha wasn't passed. (${JSON.stringify(subsequentOutcome['error-codes'])})` });
 
     try {
       let transporter = nodemailer.createTransport({
@@ -47,8 +87,8 @@ export default async function handler(req, res) {
         replyTo: `"${req.body.name}" <${req.body.email}>`,
         to: '"TheClashFruit" <admin@theclashfruit.me>',
         subject: `[Contact Form] From ${req.body.name}`,
-        text: req.body.message,
-        html: converter.makeHtml(req.body.message),
+        text: req.body.message + `\n\n----------------\n\n* User Ip: ${userIp}\n* Passed Turnstile: ${firstOutcome.success} && ${subsequentOutcome.success}`,
+        html: converter.makeHtml(req.body.message + `\n\n----------------\n\n* User Ip: ${userIp}\n* Passed Turnstile: ${firstOutcome.success} && ${subsequentOutcome.success}`),
       });
 
       res.status(200).json({ message: 'Your message has been sent.' });

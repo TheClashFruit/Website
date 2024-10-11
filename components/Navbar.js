@@ -4,6 +4,8 @@ import Button from '@/components/Button';
 import Dialog from '@/components/Dialog';
 import Input from '@/components/Input';
 
+import { Turnstile } from '@marsidev/react-turnstile';
+
 import Logo from '@/public/icons/logo.svg';
 
 import styles from '@/styles/Navbar.module.scss';
@@ -37,6 +39,9 @@ export default function Navbar({ page }) {
   const [ navCounter, setNavCounter ] = useState(0);
   const [ isEgged, setIsEgged ]       = useState(false);
 
+  const [ turnstileStatus, setTurnstileStatus ] = useState('required'); // 'success' | 'error' | 'expired' | 'required'
+  const [ error, setError ] = useState(null);
+
   useEffect(() => {
     if(window.scrollY <= 30 && navRef.current !== null)
       navRef.current.classList.remove(styles.navBarScrolled);
@@ -59,12 +64,19 @@ export default function Navbar({ page }) {
 
     const data = new FormData(e.target);
 
+    if (turnstileStatus !== 'success') {
+      setError('Please verify you are not a robot.');
+
+      return;
+    }
+
     const f = await fetch('/api/v2/contact', {
       method: 'POST',
       body: JSON.stringify({
         name: data.get('name'),
         email: data.get('email'),
-        message: data.get('msg')
+        message: data.get('msg'),
+        turnstile: data.get('cf-turnstile-response')
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -74,7 +86,7 @@ export default function Navbar({ page }) {
     const r = await f.json();
 
     if(r.error) {
-      alert(r.message);
+      setError(r.message);
     }
 
     setDialogOpen(false);
@@ -177,12 +189,25 @@ export default function Navbar({ page }) {
       </nav>
 
       {dialogOpen &&
-        <Dialog title="Contact" closeAction={() => {
-          setDialogOpen(false); }}>
+        <Dialog title="Contact" closeAction={() => { setDialogOpen(false); setError(null); }}>
           <form onSubmit={onSubmit}>
+            { error !== null && (
+              <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>
+            )}
+
             <Input required name="name"  type="text"     label="Name" />
             <Input required name="email" type="email"    label="E-Mail" />
             <Input required name="msg"   type="textarea" label="Message (Markdown Supported!)" />
+
+            <Turnstile 
+              siteKey="0x4AAAAAAAxPnbJD3b1-BfkP"
+              onError={() => setTurnstileStatus('error')}
+              onExpire={() => setTurnstileStatus('expired')}
+              onSuccess={() => {
+                setTurnstileStatus('success');
+
+                setError(null);
+              }} />
 
             <Button icon={Forward} type="primary">Send</Button>
           </form>
