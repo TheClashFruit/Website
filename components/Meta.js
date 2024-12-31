@@ -96,7 +96,7 @@ export default function Meta({ pageData }) {
           <meta property="og:image" content="https://www.theclashfruit.me/img/logo.png"/>
           <meta property="og:description" content="A full-stack web, mobile developer & mod creator."/>
 
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData.post) }} />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData.page) }} />
         </>
       )}
 
